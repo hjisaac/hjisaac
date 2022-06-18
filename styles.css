@@ -1,0 +1,87 @@
+@import './variables.css';
+
+header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+ul, ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+nav.horizontal-nav ol {
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+.logo {
+    font-weight: 700;
+}
+
+
+nav.horizontal-nav ol li {
+ padding-left: 1rem;
+ padding-right: 1rem;
+ font-weight: 700;
+ position: relative;
+}
+
+nav.horizontal-nav ol li ::after{
+    position: absolute;
+    width: 100%;
+    content: 'EEEE';
+    background-color: aqua;
+}
+
+nav.horizontal-nav ol li:hover:after{
+    background-color: red;
+}
+
+nav.horizontal-nav ol li a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+.btn-outline {
+    border: solid 4px aqua;
+    color: inherit;
+    background-color: inherit;
+    border-radius: 4px;
+    font-size: inherit;
+    font-weight: inherit;
+    padding: 0 1rem;
+}
+
+
+
+section {
+    
+}
+
+.text-dark-gray {
+    color: var(--dark-gray);
+}
+
+.text-aqua {
+    color: aqua;
+}
+.arobase {
+    display: inline-block;
+    color: aqua;
+    /* background-color: aqua; */
+}
+
+.infinite-rotation {
+    animation: rotation 1.5s infinite linear;
+}
+
+
+@keyframes rotation {
+    to {
+        transform: rotate(360deg);
+    }
+}

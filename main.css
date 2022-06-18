@@ -1,0 +1,21 @@
+@import './variables.css';
+@import './styles.css';
+
+
+body {
+    background-image: linear-gradient(to bottom right, var(--dark-blue), var(--light-black)); ;
+    ;
+    color: var(--text-color);
+    font: 0.75em Verdana, Dotum, AppleGothic,sans-serif;
+    font-size: 2rem;
+    padding: 0;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    box-sizing: border-box;
+    letter-spacing: 0.01em;
+    line-height: 3.6em;
+    font-weight: 500    ;
+    animation: toggle-gradient-colors 3s infinite linear;
+}
+
+
