@@ -89,7 +89,7 @@ nav.horizontal-nav ol li a {
     display: inline-block;
     height: 4.5rem;
     border-right: solid var(--text-color);
-    border-right-width: 5px;
+    border-right-width: 7px;
     transform: scaleY(1.4);
     transform-origin: top;
     animation: blink 1.5s infinite;
