@@ -26,7 +26,7 @@ nav.horizontal-nav ol {
 
 
 nav.horizontal-nav ol li {
- padding: 0 1rem;
+ margin-left: 2rem;
  font-weight: 700;
  display: inline-block;
  position: relative;
@@ -35,17 +35,16 @@ nav.horizontal-nav ol li {
 nav.horizontal-nav ol li ::after{
     content: '';
     position: absolute;
-    /* padding: 0 1rem; */
     width: 0%;
-    height: 3px;
-    bottom: -30px;
+    height: 5px;
+    bottom: -0.3rem;
     left: 0;
     background-color: aqua;
-    transform: all 0.5s;
+    transition: 0.5s;
     /* z-index: 2; */
 }
 
-nav.horizontal-nav ol li :hover::after{
+nav.horizontal-nav ol li :hover:after{
     /* background-color: red; */
     width: 100%;
 }
