@@ -5,6 +5,7 @@ header {
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
+    line-height: normal;
 }
 
 ul, ol {
@@ -25,8 +26,7 @@ nav.horizontal-nav ol {
 
 
 nav.horizontal-nav ol li {
- padding-left: 1rem;
- padding-right: 1rem;
+ padding: 0 1rem;
  font-weight: 700;
  display: inline-block;
  position: relative;
@@ -35,17 +35,18 @@ nav.horizontal-nav ol li {
 nav.horizontal-nav ol li ::after{
     content: '';
     position: absolute;
+    /* padding: 0 1rem; */
     width: 0%;
     height: 3px;
     bottom: -30px;
     left: 0;
     background-color: aqua;
     transform: all 0.5s;
-    z-index: 2;
+    /* z-index: 2; */
 }
 
-nav.horizontal-nav ol li:hover::after{
-    background-color: red;
+nav.horizontal-nav ol li :hover::after{
+    /* background-color: red; */
     width: 100%;
 }
 
@@ -101,6 +102,7 @@ section {
     margin-right: initial;
     height: 20vh;
     background-color: gray;
+    transform: skewY(-3deg);
 }
 section.div {
     transform: rotate(20%);
