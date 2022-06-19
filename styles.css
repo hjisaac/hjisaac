@@ -30,6 +30,11 @@ nav.horizontal-nav ol li {
  font-weight: 700;
  display: inline-block;
  position: relative;
+ 
+}
+
+nav.horizontal-nav ol li :hover {
+    color: var(--dark-gray);
 }
 
 nav.horizontal-nav ol li ::after{
