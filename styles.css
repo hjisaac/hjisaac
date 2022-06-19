@@ -28,42 +28,91 @@ nav.horizontal-nav ol li {
  padding-left: 1rem;
  padding-right: 1rem;
  font-weight: 700;
+ display: inline-block;
  position: relative;
 }
 
 nav.horizontal-nav ol li ::after{
+    content: '';
     position: absolute;
-    width: 100%;
-    content: 'EEEE';
+    width: 0%;
+    height: 3px;
+    bottom: -30px;
+    left: 0;
     background-color: aqua;
+    transform: all 0.5s;
+    z-index: 2;
 }
 
-nav.horizontal-nav ol li:hover:after{
+nav.horizontal-nav ol li:hover::after{
     background-color: red;
+    width: 100%;
 }
 
 nav.horizontal-nav ol li a {
     text-decoration: none;
     color: var(--text-color);
 }
+
 .btn-outline {
     border: solid 4px aqua;
-    color: inherit;
+    /* color: inherit; */
     background-color: inherit;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: inherit;
     font-weight: inherit;
     padding: 0 1rem;
+    cursor: pointer;
+    background-color: aqua;
+    color: var(--dark-blue);
 }
 
+.headshot {
+    margin-top: 7rem;
+    margin-right: 3rem;
+    float: right;
+    width: 35vw;
+    height: 35vw;
+    box-shadow: 0px 0px 50px aqua;
+    border-radius: 50%;
+    filter: brightness(10%);
+}
 
+.headshot:hover {
+    filter: contrast(1.5);
+    box-shadow: 0px 0px 150px aqua;
+    /* transform: rotate(360deg); */
+    transition: all 0.5s ease-in-out;
+}
+
+.blinking-cursor {
+    display: inline-block;
+    height: 4.5rem;
+    border-right: solid var(--text-color);
+    border-right-width: 5px;
+    transform: scaleY(1.4);
+    transform-origin: top;
+    animation: blink 1.5s infinite;
+}
 
 section {
-    
+    width: 100vw;
+    margin-left: initial;
+    margin-right: initial;
+    height: 20vh;
+    background-color: gray;
+}
+section.div {
+    transform: rotate(20%);
+    transition: all 0.5s linear;
 }
 
 .text-dark-gray {
     color: var(--dark-gray);
+}
+
+.bg-dark-gray {
+    background-image: linear-gradient(var(--dark-gray), var(--dark-blue));
 }
 
 .text-aqua {
@@ -72,16 +121,22 @@ section {
 .arobase {
     display: inline-block;
     color: aqua;
-    /* background-color: aqua; */
 }
 
 .infinite-rotation {
     animation: rotation 1.5s infinite linear;
-}
+}   
+
 
 
 @keyframes rotation {
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes blink {
+    100% {
+        border-right: initial;
     }
 }

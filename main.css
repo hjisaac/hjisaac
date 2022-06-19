@@ -3,8 +3,7 @@
 
 
 body {
-    background-image: linear-gradient(to bottom right, var(--dark-blue), var(--light-black)); ;
-    ;
+    background-image: linear-gradient(to bottom right, var(--dark-blue), var(--light-black)); 
     color: var(--text-color);
     font: 0.75em Verdana, Dotum, AppleGothic,sans-serif;
     font-size: 2rem;
