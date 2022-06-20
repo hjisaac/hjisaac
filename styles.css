@@ -72,6 +72,22 @@ nav.horizontal-nav ol li a {
     color: var(--dark-blue);
 }
 
+.high-line-height {
+    line-height: 3.6em;
+}
+
+.medium-line-height {
+    line-height: 2em;
+}
+
+.low-line-height {
+    line-height: 1em;
+}
+
+.bg-navy {
+    background-color: rgb(3, 32, 41);
+}
+
 .headshot {
     margin-top: 7rem;
     margin-right: 3rem;
@@ -82,6 +98,7 @@ nav.horizontal-nav ol li a {
     border-radius: 50%;
     filter: brightness(10%);
 }
+
 
 .headshot:hover {
     filter: contrast(1.5);
@@ -101,26 +118,56 @@ nav.horizontal-nav ol li a {
 }
 
 section {
+    margin-top: 3rem;
+    padding-top: 0.2rem;
+    padding-bottom: 4rem;
     width: 100vw;
-    margin-left: initial;
-    margin-right: initial;
-    height: 20vh;
-    background-color: gray;
+    height: max-content;
     transform: skewY(-3deg);
 }
-section.div {
+
+.section-title {
+    width: max-content;
+    padding: 1rem 2rem;
+}
+/* section.div {
     transform: rotate(20%);
     transition: all 0.5s linear;
+} */
+
+section
+
+.section-content {
+    padding-top: 1.3rem;
+    text-indent: 2rem;
+    padding-left: 2rem;
+    color: #6F7378;
 }
 
 .text-dark-gray {
     color: var(--dark-gray);
 }
 
+.text-blue-sky {
+    color: skyblue; 
+}
+
+.bg-blue-sky {
+    background-color: rgb(59, 144, 241); 
+}
+
 .bg-dark-gray {
     background-image: linear-gradient(var(--dark-gray), var(--dark-blue));
 }
 
+.bg-white {
+    background-color: var(--text-color);
+    color: var(--dark-blue);
+}
+
+.text-white {
+    color: #fff;
+}
 .text-aqua {
     color: aqua;
 }
@@ -131,7 +178,11 @@ section.div {
 
 .infinite-rotation {
     animation: rotation 1.5s infinite linear;
-}   
+} 
+
+.unskew {
+    transform: skewY(3deg);
+}
 
 
 
