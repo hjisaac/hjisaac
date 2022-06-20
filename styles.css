@@ -123,19 +123,19 @@ section {
     padding-bottom: 4rem;
     width: 100vw;
     height: max-content;
-    transform: skewY(-3deg);
+    transition: all 2s ease-in-out
 }
 
 .section-title {
     width: max-content;
     padding: 1rem 2rem;
+    box-shadow: 0px 3px 10px var(--dark-blue);
 }
 /* section.div {
     transform: rotate(20%);
     transition: all 0.5s linear;
 } */
 
-section
 
 .section-content {
     padding-top: 1.3rem;
@@ -163,6 +163,10 @@ section
 .bg-white {
     background-color: var(--text-color);
     color: var(--dark-blue);
+}
+
+.bg-dark-blue  {
+    background-color: var(--dark-blue);
 }
 
 .text-white {
