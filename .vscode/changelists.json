@@ -1,0 +1,13 @@
+{
+  "changelists": [
+    {
+      "name": "Default",
+      "files": [
+        "index.html",
+        ".vscode/changelists.json",
+        "headshot_lower.jpg"
+      ]
+    }
+  ],
+  "active": "Default"
+}
