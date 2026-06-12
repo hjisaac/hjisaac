@@ -4,101 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isaac Houngue | Soft Eng</title>
+    <title>Isaac Houngue | Software & Research Engineer</title>
     <link rel="stylesheet" href="main.css">
-    <script src="./main.js" type="module" defer></script>
+    <script src="./site-config.js" defer></script>
+    <script src="./shared.js" defer></script>
+    <script src="./content.js" defer></script>
+    <script src="./render.js" defer></script>
+    <script src="./main.js" defer></script>
+    <script src="./site.js" defer></script>
 </head>
 <body>
-    <header>
-        <div class="logo"><span class="text-dark-gray">Welcome</span><span class="arobase text-dark-gray infinite-rotation">@</span><span>hjisaac</span>.site</div>
- 
-        <nav class="horizontal-nav">
-            <ol>
-                
-                <li><a href="#experiences">#experience</a></li>
-                <li><a href="#education">#education</a></li>
-                <li><a href="#skills">#skills</a></li>  
-                <li><a href="#projects">#projects</a></li>
-                <li><a href="#resume">#resume</a></li>
+    <header class="site-header">
+        <div class="logo text-dark-gray" data-mount="logo"></div>
 
-            </ol>
-        <nav>
-        
+        <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+            <span class="menu-toggle__bar"></span>
+            <span class="menu-toggle__bar"></span>
+            <span class="menu-toggle__bar"></span>
+        </button>
+
+        <div class="nav-backdrop" aria-hidden="true"></div>
+
+        <nav id="site-nav" class="horizontal-nav">
+            <ol data-mount="nav"></ol>
+        </nav>
     </header>
+
     <main>
-
-    <h1 id="self-intro">
-
-        <div class="medium-line-height">
-            Hi, I'm Isaac H. J. Houngue,
-            <br/>
-            <span class="text-aqua">a software engineer</span>
-            <img class="headshot" src="./temp.jpeg" alt="Headshot/photo">
-
-            
-            <br/>
-             & tech writer <span class="blinking-cursor">  </span>
-    
-        </div>
-       
-    </h1>
-
-    <p class="high-line-height">You'd like us to work together ?</p>
-    <p class="high-line-height">Call me on (+229) 61740074</p>
-    <p class="high-line-height">Email me at hjisaach@gmail.com</p>
-        
-        <section id="experiences" class="bg-white">
-            <h2 class="bg-blue-sky text-white section-title">#Experiences</h2>
-            <p class="section-content ">
-                Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
-                aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia
-                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
-                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
-                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
-                eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
-                culpa duis.
-            </p>
-
-        </section>
-        <section id="education">
-            <h2>
-                #Education
-            </h2>
-            <p>
-                Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
-                aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia
-                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
-                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
-                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
-                eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
-                culpa duis.
-            </p>
-        </section>
-        <section id="skills" class="bg-white">
-            <h2>
-                #Skills
-            </h2>
-            <p>
-                Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
-                aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia
-                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
-                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
-                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
-                eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
-                culpa duis.
-            </p>
-        </section>
-        <section></section>
+        <noscript>
+            <p class="summary high-line-height">This site needs JavaScript to display content. You can still email <a href="mailto:hjisaac.h@gmail.com">hjisaac.h@gmail.com</a>.</p>
+        </noscript>
+        <h1 id="self-intro" data-mount="intro"></h1>
+        <p class="summary high-line-height" data-mount="summary"></p>
+        <div data-mount="contact"></div>
+        <div data-mount="sections"></div>
     </main>
+
     <footer></footer>
 </body>
 </html>

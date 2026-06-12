@@ -1,21 +1,25 @@
 @import './variables.css';
 @import './styles.css';
 
-
-body {
-    background-image: linear-gradient(to bottom right, var(--dark-blue), var(--light-black)); 
-    color: var(--text-color);
-    font: 0.75em Verdana, Dotum, AppleGothic,sans-serif;
-    font-size: 2rem;
-    padding: 0;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-    letter-spacing: 0.01em;
-    line-height: 2em;
-    font-weight: 500    ;
-    animation: toggle-gradient-colors 3s infinite linear;
 }
 
+html {
+    overflow-x: hidden;
+}
 
-
+body {
+    background-image: linear-gradient(to bottom right, var(--color-bg-dark), var(--color-bg-black));
+    color: var(--color-text);
+    font: 0.75em var(--font-family);
+    font-size: clamp(var(--font-size-min), 2.5vw + 0.75rem, var(--font-size-max));
+    padding: 0;
+    margin-left: var(--page-padding);
+    margin-right: var(--page-padding);
+    letter-spacing: 0.01em;
+    line-height: var(--line-height-body);
+    font-weight: 500;
+}
