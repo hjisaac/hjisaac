@@ -4,7 +4,7 @@
  */
 window.Site = {
     STORAGE: {
-        RESUME_UNLOCKED: 'resume-unlocked',
+        CV_UNLOCKED: 'cv-unlocked',
         VISIT_TRACKED: 'visit-tracked',
     },
 

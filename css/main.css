@@ -12,8 +12,8 @@ html {
 }
 
 body {
-    background-image: linear-gradient(to bottom right, var(--color-bg-dark), var(--color-bg-black));
-    color: var(--color-text);
+    background-image: linear-gradient(to bottom right, var(--bg-page-start), var(--bg-page-end));
+    color: var(--fg-on-dark);
     font: 0.75em var(--font-family);
     font-size: clamp(var(--font-size-min), 2.5vw + 0.75rem, var(--font-size-max));
     padding: 0;

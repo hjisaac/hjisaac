@@ -12,7 +12,7 @@ python3 -m http.server 8765
 | Goal | File |
 |------|------|
 | Copy, jobs, projects, links | `js/content.js` |
-| Colors, spacing, breakpoints | `css/variables.css` |
+| Colors, spacing, breakpoints | `css/variables.css` (palette + role tokens) |
 | Web3Forms key, visit tracking | `config/site-config.js` (copy from `config/site-config.example.js`) |
 
 ## Assets
