@@ -23,6 +23,7 @@ function renderSite(content) {
     renderIntro('[data-mount="intro"]', content.intro);
     renderText('[data-mount="summary"]', content.summary);
     renderSections('[data-mount="sections"]', content.sections, content.ui);
+    renderFooter('[data-mount="footer"]', content.footer);
 }
 
 function renderLogo(selector, text) {
@@ -69,22 +70,51 @@ function renderIntro(selector, intro) {
         return;
     }
 
-    container.replaceChildren(
-        createElement('div', {}, [
-            createElement('img', {
-                className: 'headshot',
-                src: intro.headshot,
-                alt: intro.headshotAlt,
-                loading: 'lazy',
-                decoding: 'async',
-            }),
-            createElement('div', { className: 'intro__lines' }, [
-                createElement('span', { className: 'intro__line', textContent: intro.greeting }),
-                createElement('span', { className: 'intro__line' }, [
-                    createElement('span', { className: 'text-accent', textContent: intro.roleHighlight }),
-                ]),
+    const hero = createElement('div', { className: 'hero' });
+
+    if (intro.headshot) {
+        hero.append(createElement('img', {
+            className: 'hero__photo',
+            src: intro.headshot,
+            alt: '',
+            loading: 'eager',
+            decoding: 'async',
+            attributes: { 'aria-hidden': 'true' },
+        }));
+        hero.append(createElement('div', { className: 'hero__shade', attributes: { 'aria-hidden': 'true' } }));
+    }
+
+    hero.append(
+        createElement('div', { className: 'intro__lines' }, [
+            createElement('span', { className: 'intro__line', textContent: intro.greeting }),
+            createElement('span', { className: 'intro__line' }, [
+                createElement('span', { className: 'text-accent', textContent: intro.roleHighlight }),
             ]),
         ]),
+    );
+
+    container.replaceChildren(hero);
+}
+
+function renderFooter(selector, footer) {
+    const container = queryMount(selector);
+    if (!container || !footer) {
+        return;
+    }
+
+    const note = createElement('p', { className: 'site-footer__note' }, [
+        document.createTextNode(footer.noteBeforeLink || ''),
+        createElement('a', {
+            className: 'site-footer__link',
+            href: footer.contactHref || '#contact',
+            textContent: footer.contactLinkLabel || 'contact form',
+        }),
+        document.createTextNode('.'),
+    ]);
+
+    container.replaceChildren(
+        createElement('p', { className: 'site-footer__copyright', textContent: footer.copyright }),
+        note,
     );
 }
 
@@ -100,6 +130,7 @@ function renderSections(selector, sections, ui) {
         renderSkillsSection(sections.skills),
         renderProjectsSection(sections.projects, ui),
         renderContactSection(sections.contact),
+        renderPapersSection(sections.papers),
     ].filter(Boolean);
 
     container.replaceChildren(...renderedSections);
@@ -118,6 +149,10 @@ function renderEducationSection(section) {
 
 function renderProjectsSection(section, ui) {
     return renderEntrySection(section, (entry) => renderProjectEntry(entry, ui));
+}
+
+function renderPapersSection(section) {
+    return renderEntrySection(section, (entry) => renderEntryArticle(entry));
 }
 
 function renderEntrySection(section, renderEntry) {
@@ -183,7 +218,6 @@ function renderContactSection(section) {
         ...(section.prompt
             ? [createElement('p', { className: 'contact-intro', textContent: section.prompt })]
             : []),
-        createElement('p', { className: 'contact-intro', textContent: section.gateIntro }),
         renderContactForm(section),
     ]);
 

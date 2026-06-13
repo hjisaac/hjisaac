@@ -45,16 +45,12 @@
     /* Layout */
     --drawer-breakpoint: 1500px;
     --drawer-width: min(80vw, 280px);
-    --headshot-max-size: 320px;
     --summary-max-width: 65ch;
 
     /* Effects */
     --radius-sm: 5px;
     --border-width-btn: 4px;
     --border-width-tag: 2px;
-    --shadow-section: 0 3px 10px var(--navy);
-    --shadow-headshot: 0 0 32px rgba(69, 176, 235, 0.4);
-    --shadow-headshot-hover: 0 0 48px rgba(69, 176, 235, 0.75), 0 0 72px rgba(69, 176, 235, 0.35);
     --shadow-drawer: -4px 0 24px rgba(0, 0, 0, 0.4);
     --transition-fast: 0.3s ease;
     --transition-nav: 0.5s;

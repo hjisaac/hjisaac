@@ -17,6 +17,7 @@ window.SITE_CONTENT = {
         { href: '#skills', label: '#skills' },
         { href: '#projects', label: '#projects' },
         { href: '#contact', label: '#contact' },
+        { href: '#papers', label: '#papers' },
     ],
 
     intro: {
@@ -185,7 +186,6 @@ window.SITE_CONTENT = {
             theme: 'light',
             prompt: "You'd like us to work together?",
             cvFile: './assets/cv/isaac_houngue_cv_may_2026.pdf',
-            gateIntro: "Say hello — I'd love to know who stopped by before sharing my CV.",
             downloadIntro: 'Thanks for saying hello — here is my CV.',
             downloadLabel: 'Download CV (PDF)',
             form: {
@@ -196,6 +196,29 @@ window.SITE_CONTENT = {
                 submitLabel: 'Say hello',
             },
         },
+
+        papers: {
+            id: 'papers',
+            title: '#papers',
+            theme: 'dark',
+            entries: [
+                {
+                    title: 'Advancing De Novo Glycopeptide Sequencing with InstaNovo in Glycoproteomics',
+                    meta: 'MSc thesis · African Institute for Mathematical Sciences · 2025',
+                },
+                {
+                    title: 'A Smart Contract-based Remote Voting Platform using Blind Signature',
+                    meta: 'MSc thesis · Institute of Mathematics and Physical Sciences · 2020',
+                },
+            ],
+        },
+    },
+
+    footer: {
+        copyright: '© 2022–2026 Isaac H. J. Houngue',
+        noteBeforeLink: 'Designed with simplicity and beauty in mind. Feel free to send feedback through the ',
+        contactLinkLabel: 'contact form',
+        contactHref: '#contact',
     },
 
     ui: {
