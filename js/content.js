@@ -8,7 +8,7 @@ window.SITE_CONTENT = {
     },
 
     header: {
-        logo: "You're@hjisaac, welcome!",
+        logo: "you're@hjisaac",
     },
 
     nav: [
@@ -16,13 +16,13 @@ window.SITE_CONTENT = {
         { href: '#education', label: '#education' },
         { href: '#skills', label: '#skills' },
         { href: '#projects', label: '#projects' },
-        { href: '#resume', label: '#resume' },
+        { href: '#contact', label: '#contact' },
+        { href: '#papers', label: '#papers' },
     ],
 
     intro: {
-        greeting: "Hi, I'm Isaac H. J. Houngue,",
-        roleHighlight: 'a software & research engineer',
-        roleSuffix: '& tech writer',
+        greeting: "I'm Isaac H. J. Houngue,",
+        roleHighlight: 'a software & research engineer.',
         headshot: './assets/images/headshot_lower.jpg',
         headshotAlt: 'Isaac Houngue',
     },
@@ -30,19 +30,11 @@ window.SITE_CONTENT = {
     summary:
         'Motivated Software and Research Engineer with MSc backgrounds in Artificial Intelligence and Computer Science. I combine 3+ years of software engineering with research experience in machine learning and scientific AI — building intelligent systems that are simple, robust, and useful.',
 
-    contact: {
-        prompt: "You'd like us to work together?",
-        location: 'Cape Town, South Africa',
-        phone: { display: '+27 79 548 2528', href: 'tel:+27795482528' },
-        email: { display: 'hjisaac.h@gmail.com', href: 'mailto:hjisaac.h@gmail.com' },
-    },
-
     sections: {
         experience: {
             id: 'experiences',
-            title: '#Experience',
+            title: '#experience',
             theme: 'light',
-            titleVariant: 'pill',
             entries: [
                 {
                     role: 'Apprentice Research Engineer',
@@ -99,9 +91,8 @@ window.SITE_CONTENT = {
 
         education: {
             id: 'education',
-            title: '#Education',
+            title: '#education',
             theme: 'dark',
-            titleVariant: 'plain',
             entries: [
                 {
                     title: 'MSc Artificial Intelligence — African Institute for Mathematical Sciences (AIMS)',
@@ -126,9 +117,8 @@ window.SITE_CONTENT = {
 
         skills: {
             id: 'skills',
-            title: '#Skills',
+            title: '#skills',
             theme: 'light',
-            titleVariant: 'plain',
             groups: [
                 { label: 'Programming Languages', items: 'Python, JavaScript, TypeScript' },
                 { label: 'Frameworks & Libraries', items: 'Django, DRF, Flask, Ninja, Node.js, Vue.js, React.js, Next.js, GraphQL, PyTorch, Keras' },
@@ -138,9 +128,8 @@ window.SITE_CONTENT = {
 
         projects: {
             id: 'projects',
-            title: '#Projects',
+            title: '#projects',
             theme: 'dark',
-            titleVariant: 'pill',
             // Optional per project: github, view (live demo), gif (e.g. './assets/projects/run-crucible.gif')
             entries: [
                 {
@@ -191,13 +180,12 @@ window.SITE_CONTENT = {
             ],
         },
 
-        resume: {
-            id: 'resume',
-            title: '#Resume',
+        contact: {
+            id: 'contact',
+            title: '#contact',
             theme: 'light',
-            titleVariant: 'pill',
+            prompt: "You'd like us to work together?",
             cvFile: './assets/cv/isaac_houngue_cv_may_2026.pdf',
-            gateIntro: "Say hello — I'd love to know who stopped by before sharing my CV.",
             downloadIntro: 'Thanks for saying hello — here is my CV.',
             downloadLabel: 'Download CV (PDF)',
             form: {
@@ -208,6 +196,29 @@ window.SITE_CONTENT = {
                 submitLabel: 'Say hello',
             },
         },
+
+        papers: {
+            id: 'papers',
+            title: '#papers',
+            theme: 'dark',
+            entries: [
+                {
+                    title: 'Advancing De Novo Glycopeptide Sequencing with InstaNovo in Glycoproteomics',
+                    meta: 'MSc thesis · African Institute for Mathematical Sciences · 2025',
+                },
+                {
+                    title: 'A Smart Contract-based Remote Voting Platform using Blind Signature',
+                    meta: 'MSc thesis · Institute of Mathematics and Physical Sciences · 2020',
+                },
+            ],
+        },
+    },
+
+    footer: {
+        copyright: '© 2022–2026 Isaac H. J. Houngue',
+        noteBeforeLink: 'Designed with simplicity and beauty in mind. Feel free to send feedback through the ',
+        contactLinkLabel: 'contact form',
+        contactHref: '#contact',
     },
 
     ui: {
@@ -219,7 +230,7 @@ window.SITE_CONTENT = {
         formFallbackName: 'Anonymous',
         formFallbackEmail: 'not provided',
         formFallbackMessage: '(no message)',
-        resumeSubject: 'Resume request — hjisaac.site',
+        contactSubject: 'Contact — hjisaac.site',
         visitSubject: 'Site visit — hjisaac.site',
         visitEmail: 'visitor@hjisaac.site',
         projectViewLabel: 'view live',

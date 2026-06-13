@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    initResumeGate();
+    initContactGate();
     trackVisit();
 });
 
@@ -33,19 +33,19 @@ async function submitToWeb3Forms(payload) {
     return result;
 }
 
-function initResumeGate() {
-    const form = document.getElementById('resume-form');
-    const gate = document.getElementById('resume-gate');
-    const download = document.getElementById('resume-download');
-    const status = document.getElementById('resume-form-status');
+function initContactGate() {
+    const form = document.getElementById('contact-form');
+    const gate = document.getElementById('contact-gate');
+    const download = document.getElementById('contact-download');
+    const status = document.getElementById('contact-form-status');
     const ui = Site.getUi();
 
     if (!form || !gate || !download) {
         return;
     }
 
-    if (sessionStorage.getItem(Site.STORAGE.RESUME_UNLOCKED) === 'true') {
-        showResumeDownload(gate, download);
+    if (sessionStorage.getItem(Site.STORAGE.CV_UNLOCKED) === 'true') {
+        showCvDownload(gate, download);
         return;
     }
 
@@ -67,14 +67,14 @@ function initResumeGate() {
 
         try {
             await submitToWeb3Forms({
-                subject: ui.resumeSubject,
+                subject: ui.contactSubject,
                 from_name: name,
                 email,
-                message: `${message}\n\n— Resume download requested from hjisaac.site`,
+                message: `${message}\n\n— CV download requested from hjisaac.site`,
             });
 
-            sessionStorage.setItem(Site.STORAGE.RESUME_UNLOCKED, 'true');
-            showResumeDownload(gate, download);
+            sessionStorage.setItem(Site.STORAGE.CV_UNLOCKED, 'true');
+            showCvDownload(gate, download);
         } catch (error) {
             const messageText = error.message === 'missing_access_key'
                 ? ui.formMissingKey
@@ -85,7 +85,7 @@ function initResumeGate() {
     });
 }
 
-function showResumeDownload(gate, download) {
+function showCvDownload(gate, download) {
     gate.hidden = true;
     download.hidden = false;
 }

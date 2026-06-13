@@ -18,12 +18,24 @@ function renderSite(content) {
         document.title = content.meta.title;
     }
 
-    renderText('[data-mount="logo"]', content.header?.logo);
+    renderLogo('[data-mount="logo"]', content.header?.logo);
     renderNav('[data-mount="nav"]', content.nav);
     renderIntro('[data-mount="intro"]', content.intro);
     renderText('[data-mount="summary"]', content.summary);
-    renderContact('[data-mount="contact"]', content.contact);
     renderSections('[data-mount="sections"]', content.sections, content.ui);
+    renderFooter('[data-mount="footer"]', content.footer);
+}
+
+function renderLogo(selector, text) {
+    const element = queryMount(selector);
+    if (!element || !text) {
+        return;
+    }
+
+    element.replaceChildren(
+        createElement('span', { className: 'logo-wave', attributes: { 'aria-hidden': 'true' }, textContent: '👋' }),
+        document.createTextNode(` ${text}`),
+    );
 }
 
 function renderText(selector, text) {
@@ -58,57 +70,52 @@ function renderIntro(selector, intro) {
         return;
     }
 
-    container.replaceChildren(
-        createElement('div', { className: 'medium-line-height' }, [
-            document.createTextNode(intro.greeting),
-            createElement('br'),
-            createElement('span', { className: 'text-aqua', textContent: intro.roleHighlight }),
-            createElement('img', {
-                className: 'headshot',
-                src: intro.headshot,
-                alt: intro.headshotAlt,
-                loading: 'lazy',
-                decoding: 'async',
-            }),
-            createElement('br'),
-            document.createTextNode(` ${intro.roleSuffix} `),
-            createElement('span', { className: 'blinking-cursor', attributes: { 'aria-hidden': 'true' } }),
+    const hero = createElement('div', { className: 'hero' });
+
+    if (intro.headshot) {
+        hero.append(createElement('img', {
+            className: 'hero__photo',
+            src: intro.headshot,
+            alt: '',
+            loading: 'eager',
+            decoding: 'async',
+            attributes: { 'aria-hidden': 'true' },
+        }));
+        hero.append(createElement('div', { className: 'hero__shade', attributes: { 'aria-hidden': 'true' } }));
+    }
+
+    hero.append(
+        createElement('div', { className: 'intro__lines' }, [
+            createElement('span', { className: 'intro__line', textContent: intro.greeting }),
+            createElement('span', { className: 'intro__line' }, [
+                createElement('span', { className: 'text-accent', textContent: intro.roleHighlight }),
+            ]),
         ]),
     );
+
+    container.replaceChildren(hero);
 }
 
-function renderContact(selector, contact) {
+function renderFooter(selector, footer) {
     const container = queryMount(selector);
-    if (!container || !contact) {
+    if (!container || !footer) {
         return;
     }
 
-    const lines = [
-        createParagraph('high-line-height contact-links', contact.prompt),
-        createParagraph('high-line-height contact-links', contact.location),
-    ];
+    const note = createElement('p', { className: 'site-footer__note' }, [
+        document.createTextNode(footer.noteBeforeLink || ''),
+        createElement('a', {
+            className: 'site-footer__link',
+            href: footer.contactHref || '#contact',
+            textContent: footer.contactLinkLabel || 'contact form',
+        }),
+        document.createTextNode('.'),
+    ]);
 
-    if (contact.phone?.href && contact.phone?.display) {
-        lines.push(createContactLine('Call me on ', contact.phone));
-    }
-
-    if (contact.email?.href && contact.email?.display) {
-        lines.push(createContactLine('Email me at ', contact.email));
-    }
-
-    container.replaceChildren(...lines);
-}
-
-function createContactLine(prefix, linkData) {
-    const paragraph = createElement('p', { className: 'high-line-height contact-links' });
-    const link = createElement('a', { href: linkData.href });
-    link.textContent = `${prefix}${linkData.display}`;
-    paragraph.append(link);
-    return paragraph;
-}
-
-function createParagraph(className, text) {
-    return createElement('p', { className, textContent: text });
+    container.replaceChildren(
+        createElement('p', { className: 'site-footer__copyright', textContent: footer.copyright }),
+        note,
+    );
 }
 
 function renderSections(selector, sections, ui) {
@@ -122,7 +129,8 @@ function renderSections(selector, sections, ui) {
         renderEducationSection(sections.education),
         renderSkillsSection(sections.skills),
         renderProjectsSection(sections.projects, ui),
-        renderResumeSection(sections.resume),
+        renderContactSection(sections.contact),
+        renderPapersSection(sections.papers),
     ].filter(Boolean);
 
     container.replaceChildren(...renderedSections);
@@ -141,6 +149,10 @@ function renderEducationSection(section) {
 
 function renderProjectsSection(section, ui) {
     return renderEntrySection(section, (entry) => renderProjectEntry(entry, ui));
+}
+
+function renderPapersSection(section) {
+    return renderEntrySection(section, (entry) => renderEntryArticle(entry));
 }
 
 function renderEntrySection(section, renderEntry) {
@@ -195,24 +207,26 @@ function renderSkillsSection(section) {
     return element;
 }
 
-function renderResumeSection(section) {
+function renderContactSection(section) {
     if (!section?.id || !section.form) {
         return null;
     }
 
     const element = createSectionElement(section);
 
-    const gate = createElement('div', { id: 'resume-gate', className: 'resume-gate section-content' }, [
-        createElement('p', { className: 'resume-intro', textContent: section.gateIntro }),
-        renderResumeForm(section),
+    const gate = createElement('div', { id: 'contact-gate', className: 'section-content' }, [
+        ...(section.prompt
+            ? [createElement('p', { className: 'contact-intro', textContent: section.prompt })]
+            : []),
+        renderContactForm(section),
     ]);
 
     const download = createElement('div', {
-        id: 'resume-download',
+        id: 'contact-download',
         className: 'section-content',
         hidden: true,
     }, [
-        createElement('p', { className: 'resume-intro', textContent: section.downloadIntro }),
+        createElement('p', { className: 'contact-intro', textContent: section.downloadIntro }),
         createElement('a', {
             className: 'btn-outline',
             href: section.cvFile,
@@ -225,16 +239,22 @@ function renderResumeSection(section) {
     return element;
 }
 
-function renderResumeForm(section) {
+function renderContactForm(section) {
     const fields = section.form;
 
-    return createElement('form', { id: 'resume-form', className: 'resume-form' }, [
-        createFormField('name', fields.nameLabel, 'text', 'name'),
-        createFormField('email', fields.emailLabel, 'email', 'email'),
-        createFormField('message', fields.messageLabel, 'textarea', undefined, fields.messagePlaceholder),
+    return createElement('form', { id: 'contact-form', className: 'contact-form' }, [
+        createElement('div', { className: 'contact-form__fields' }, [
+            createElement('div', { className: 'contact-form__column contact-form__column--details' }, [
+                createFormField('name', fields.nameLabel, 'text', 'name'),
+                createFormField('email', fields.emailLabel, 'email', 'email'),
+            ]),
+            createElement('div', { className: 'contact-form__column contact-form__column--message' }, [
+                createFormField('message', fields.messageLabel, 'textarea', undefined, fields.messagePlaceholder),
+            ]),
+        ]),
         createElement('button', { className: 'btn-outline', type: 'submit', textContent: fields.submitLabel }),
         createElement('p', {
-            id: 'resume-form-status',
+            id: 'contact-form-status',
             className: 'form-status',
             attributes: { 'aria-live': 'polite' },
         }),
@@ -397,14 +417,8 @@ function renderToolTags(tools) {
 }
 
 function createSectionTitle(section) {
-    const classes = [];
-
-    if (section.titleVariant === 'pill') {
-        classes.push('section-title', 'bg-blue-sky', 'text-white');
-    }
-
     return createElement('h2', {
-        className: classes.length ? classes.join(' ') : undefined,
+        className: 'section-title bg-blue-sky text-white',
         textContent: section.title,
     });
 }
