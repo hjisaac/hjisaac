@@ -1,0 +1,53 @@
+# Website-specific UI strings
+meta:
+  title: "Isaac Houngue | Software & Research Engineer"
+header:
+  logo: "you're@hjisaac"
+nav:
+  - href: "#experiences"
+    label: "#experience"
+  - href: "#education"
+    label: "#education"
+  - href: "#skills"
+    label: "#skills"
+  - href: "#projects"
+    label: "#projects"
+  - href: "#contact"
+    label: "#contact"
+  - href: "#papers"
+    label: "#papers"
+intro:
+  greeting: "I'm Isaac H. J. Houngue,"
+  roleHighlight: "a software & research engineer."
+  headshot: "./assets/images/headshot_lower.jpg"
+  headshotAlt: "Isaac Houngue"
+summary_key: "general"
+sections:
+  experience:
+    id: "experiences"
+    title: "#experience"
+    theme: "light"
+    items: ["instadeep", "fasfox_backend", "fasfox_frontend", "anac_intern"]
+  education:
+    id: "education"
+    title: "#education"
+    theme: "dark"
+    items: ["aims_masters", "imsp_masters"]
+  skills:
+    id: "skills"
+    title: "#skills"
+    theme: "light"
+  projects:
+    id: "projects"
+    title: "#projects"
+    theme: "dark"
+    items: ["run_crucible", "billvoicer"]
+  contact:
+    id: "contact"
+    title: "#contact"
+    theme: "light"
+  papers:
+    id: "papers"
+    title: "#papers"
+    theme: "dark"
+footer: {}
