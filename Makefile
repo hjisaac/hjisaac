@@ -1,4 +1,4 @@
-.PHONY: sync build-cv
+.PHONY: sync build-cv deploy
 
 sync:
 	python3 scripts/sync.py

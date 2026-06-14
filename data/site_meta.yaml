@@ -41,13 +41,42 @@ sections:
     id: "projects"
     title: "#projects"
     theme: "dark"
-    items: ["run_crucible", "billvoicer"]
+    items: ["run_crucible", "billvoicer", "recommender_system", "bvote", "nsequence", "stream_processing"]
   contact:
     id: "contact"
     title: "#contact"
     theme: "light"
+    prompt: "I'm always open to discussing new projects, research opportunities, or just having a chat. Feel free to reach out!"
+    form:
+      nameLabel: "Name"
+      emailLabel: "Email"
+      messageLabel: "Message"
+      messagePlaceholder: "Hello Isaac, I'm reaching out because…"
+      submitLabel: "Say hello"
   papers:
     id: "papers"
     title: "#papers"
     theme: "dark"
-footer: {}
+    entries:
+      - title: "Advancing De Novo Glycopeptide Sequencing with InstaNovo in Glycoproteomics"
+        meta: "MSc thesis · African Institute for Mathematical Sciences · 2025"
+      - title: "A Smart Contract-based Remote Voting Platform using Blind Signature"
+        meta: "MSc thesis · Institute of Mathematics and Physical Sciences · 2020"
+footer:
+  copyright: "© 2022–2026 Isaac H. J. Houngue"
+  noteBeforeLink: "Designed with simplicity and beauty in mind. Feel free to send feedback through the "
+  contactLinkLabel: "contact form"
+  contactHref: "#contact"
+ui:
+  menuOpen: "Open menu"
+  menuClose: "Close menu"
+  formSending: "Sending…"
+  formMissingKey: "Form is not configured yet. Add your access key to config/site-config.js."
+  formError: "Something went wrong. Please try again or email me directly."
+  formFallbackName: "Anonymous"
+  formFallbackEmail: "not provided"
+  formFallbackMessage: "(no message)"
+  contactSubject: "Contact — hjisaac.site"
+  visitSubject: "Site visit — hjisaac.site"
+  visitEmail: "visitor@hjisaac.site"
+  projectViewLabel: "view live"

@@ -410,9 +410,9 @@ function renderBulletList(items) {
 
 function renderToolTags(tools) {
     const container = createElement('p', { className: 'entry-tools' });
-    tools.forEach((tool) => {
-        container.append(createElement('span', { className: 'tool-tag', textContent: tool }));
-    });
+    if (Array.isArray(tools)) {
+        container.textContent = tools.join(', ');
+    }
     return container;
 }
 
