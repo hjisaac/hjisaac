@@ -5,8 +5,8 @@ import yaml
 
 def sync():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    cv_data_path = os.path.join(root, 'data/cvitae/dist/master.json')
-    meta_path = os.path.join(root, 'data/site_meta.yaml')
+    cv_data_path = os.path.join(root, 'cvitae/dist/master.json')
+    meta_path = os.path.join(root, 'site_meta.yaml')
     output_path = os.path.join(root, 'js/content.js')
 
     if not os.path.exists(cv_data_path):
