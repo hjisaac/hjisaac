@@ -35,10 +35,17 @@ async function submitToWeb3Forms(payload) {
 
 function initContactGate() {
     const form = document.getElementById('contact-form');
+    const gate = document.getElementById('contact-gate');
+    const download = document.getElementById('contact-download');
     const status = document.getElementById('contact-form-status');
     const ui = Site.getUi();
 
-    if (!form) {
+    if (!form || !gate || !download) {
+        return;
+    }
+
+    if (sessionStorage.getItem(Site.STORAGE.CV_UNLOCKED) === 'true') {
+        showCvDownload(gate, download);
         return;
     }
 
@@ -63,11 +70,11 @@ function initContactGate() {
                 subject: ui.contactSubject,
                 from_name: name,
                 email,
-                message: `${message}\n\n— Contact message from hjisaac.site`,
+                message: `${message}\n\n— CV download requested from hjisaac.site`,
             });
 
-            setFormStatus(status, "Message sent successfully!");
-            form.reset();
+            sessionStorage.setItem(Site.STORAGE.CV_UNLOCKED, 'true');
+            showCvDownload(gate, download);
         } catch (error) {
             const messageText = error.message === 'missing_access_key'
                 ? ui.formMissingKey
@@ -76,6 +83,11 @@ function initContactGate() {
             submitButton.disabled = false;
         }
     });
+}
+
+function showCvDownload(gate, download) {
+    gate.hidden = true;
+    download.hidden = false;
 }
 
 function setFormStatus(element, text, isError = false) {
