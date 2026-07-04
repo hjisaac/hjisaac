@@ -110,7 +110,7 @@ def build_content(cv_data, meta):
         "header": meta["header"],
         "nav": meta["nav"],
         "intro": meta["intro"],
-        "summary": cv_data["summary"].get(meta.get("summary_key", "general"), "").strip(),
+        "summary": cv_data["cv"]["summary"].strip(),
         "sections": {},
         "footer": meta["footer"],
         "ui": meta["ui"],
@@ -189,7 +189,7 @@ def build_content(cv_data, meta):
 
 def sync():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    cv_data_path = os.path.join(root, "cvitae/dist/master.json")
+    cv_data_path = os.path.join(root, "cvitae/outputs/en/general.json")
     meta_path = os.path.join(root, "site_meta.yaml")
     output_path = os.path.join(root, "js/content.js")
 

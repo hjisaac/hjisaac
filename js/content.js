@@ -38,7 +38,7 @@ window.SITE_CONTENT = {
         "headshot": "./assets/images/headshot_lower.jpg",
         "headshotAlt": "Isaac Houngue"
     },
-    "summary": "Motivated Software and Research Engineer with MSc backgrounds in Artificial Intelligence and Computer Science. I combine 3+ years of software engineering with research experience in machine learning and scientific AI — building intelligent systems that are simple, robust, and useful.",
+    "summary": "Motivated and hardworking Software and Research Engineer with MSc backgrounds in Artificial Intelligence and Computer Science, combining 3+ years of software engineering experience with research engineering experience in machine learning and scientific AI systems. Strong debugging and problem-solving skills; passionate about developing intelligent systems and translating research into usable, simple, effective, robust, and innovative solutions. Proactive and initiative-driven, accustomed to quality-focused environments and ready to take on challenging tasks with confidence and commitment.",
     "sections": {
         "experience": {
             "id": "experiences",

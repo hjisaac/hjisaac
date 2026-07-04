@@ -85,11 +85,14 @@ def validate_content(content):
 
 def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    cv_data_path = os.path.join(root, "cvitae/dist/master.json")
+    cv_data_path = os.path.join(root, "cvitae/contents/cv_variants/general.yaml")
     meta_path = os.path.join(root, "site_meta.yaml")
 
-    with open(cv_data_path, "r", encoding="utf-8") as f:
-        cv_data = json.load(f)
+    sys.path.insert(0, os.path.join(root, "cvitae"))
+    from backend.loader import load_yaml
+    from pathlib import Path
+    
+    cv_data = load_yaml(Path(cv_data_path))
     with open(meta_path, "r", encoding="utf-8") as f:
         meta = yaml.safe_load(f)
 
