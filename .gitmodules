@@ -1,0 +1,3 @@
+[submodule "cvitae"]
+	path = cvitae
+	url = git@hjisaac.github.com:hjisaac/cvitae.git

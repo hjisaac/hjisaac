@@ -1,0 +1,97 @@
+# Website-specific UI strings
+meta:
+  title: "Isaac Houngue | Software & Research Engineer"
+header:
+  logo: "you're@hjisaac"
+nav:
+  - href: "#experiences"
+    label: "#experience"
+  - href: "#education"
+    label: "#education"
+  - href: "#skills"
+    label: "#skills"
+  - href: "#projects"
+    label: "#projects"
+  - href: "#contact"
+    label: "#contact"
+  - href: "#papers"
+    label: "#papers"
+intro:
+  greeting: "I'm Isaac H. J. Houngue,"
+  roleHighlight: "a software & research engineer."
+  headshot: "./assets/images/headshot_lower.jpg"
+  headshotAlt: "Isaac Houngue"
+summary_key: "general"
+sections:
+  experience:
+    id: "experiences"
+    title: "#experience"
+    theme: "light"
+    items: ["instadeep", "fasfox_backend", "fasfox_frontend", "anac_intern"]
+  education:
+    id: "education"
+    title: "#education"
+    theme: "dark"
+    items: ["aims_masters", "imsp_masters"]
+    overrides:
+      aims_masters:
+        title: "MSc Artificial Intelligence — African Institute for Mathematical Sciences (AIMS)"
+        footnoteMarker: "1"
+        footnote: "In partnership with the University of Cape Town."
+      imsp_masters:
+        title: "MSc Computer Science — Institute of Mathematics and Physical Sciences (IMSP)"
+  skills:
+    id: "skills"
+    title: "#skills"
+    theme: "light"
+  projects:
+    id: "projects"
+    title: "#projects"
+    theme: "dark"
+    items: ["run_crucible", "billvoicer", "recommender_system", "bvote", "nsequence", "stream_processing"]
+    overrides:
+      billvoicer:
+        bulletsOnly: true
+      recommender_system:
+        view: "https://recommender-system-cixeur34nxyb5prblsl4yt.streamlit.app/"
+  contact:
+    id: "contact"
+    title: "#contact"
+    theme: "light"
+    prompt: "You'd like us to work together?"
+    cvFile: "./assets/cv/isaac_houngue_cv_may_2026.pdf"
+    downloadIntro: "Thanks for saying hello — here is my CV."
+    downloadLabel: "Download CV (PDF)"
+    form:
+      nameLabel: "Name"
+      emailLabel: "Email"
+      messageLabel: "Message"
+      messagePlaceholder: "Hello Isaac, I'm reaching out because…"
+      submitLabel: "Say hello"
+  papers:
+    id: "papers"
+    title: "#papers"
+    theme: "dark"
+    entries:
+      - title: "Advancing De Novo Glycopeptide Sequencing with InstaNovo in Glycoproteomics"
+        meta: "MSc thesis · African Institute for Mathematical Sciences · 2025"
+      - title: "A Smart Contract-based Remote Voting Platform using Blind Signature"
+        meta: "MSc thesis · Institute of Mathematics and Physical Sciences · 2020"
+footer:
+  copyright: "© 2022–2026 Isaac H. J. Houngue"
+  noteBeforeLink: "Designed with simplicity and beauty in mind. Feel free to send feedback through the "
+  contactLinkLabel: "contact form"
+  contactHref: "#contact"
+ui:
+  menuOpen: "Open menu"
+  menuClose: "Close menu"
+  formSending: "Sending…"
+  formMissingKey: "Form is not configured yet. Add your access key to config/site-config.js."
+  formError: "Something went wrong. Please try again or email me directly."
+  formFallbackName: "Anonymous"
+  formFallbackEmail: "not provided"
+  formFallbackMessage: "(no message)"
+  contactSubject: "Contact — hjisaac.site"
+  visitSubject: "Site visit — hjisaac.site"
+  visitEmail: "visitor@hjisaac.site"
+  projectViewLabel: "view live"
