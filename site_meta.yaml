@@ -33,6 +33,13 @@ sections:
     title: "#education"
     theme: "dark"
     items: ["aims_masters", "imsp_masters"]
+    overrides:
+      aims_masters:
+        title: "MSc Artificial Intelligence — African Institute for Mathematical Sciences (AIMS)"
+        footnoteMarker: "1"
+        footnote: "In partnership with the University of Cape Town."
+      imsp_masters:
+        title: "MSc Computer Science — Institute of Mathematics and Physical Sciences (IMSP)"
   skills:
     id: "skills"
     title: "#skills"
@@ -42,11 +49,19 @@ sections:
     title: "#projects"
     theme: "dark"
     items: ["run_crucible", "billvoicer", "recommender_system", "bvote", "nsequence", "stream_processing"]
+    overrides:
+      billvoicer:
+        bulletsOnly: true
+      recommender_system:
+        view: "https://recommender-system-cixeur34nxyb5prblsl4yt.streamlit.app/"
   contact:
     id: "contact"
     title: "#contact"
     theme: "light"
-    prompt: "I'm always open to discussing new projects, research opportunities, or just having a chat. Feel free to reach out!"
+    prompt: "You'd like us to work together?"
+    cvFile: "./assets/cv/isaac_houngue_cv_may_2026.pdf"
+    downloadIntro: "Thanks for saying hello — here is my CV."
+    downloadLabel: "Download CV (PDF)"
     form:
       nameLabel: "Name"
       emailLabel: "Email"
