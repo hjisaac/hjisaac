@@ -1,0 +1,25 @@
+---
+interface Props {
+    greeting: string;
+    roleHighlight: string;
+    headshot?: string;
+    headshotAlt?: string;
+}
+
+const { greeting, roleHighlight, headshot, headshotAlt } = Astro.props;
+---
+
+<h1 id="self-intro">
+    <div class="hero">
+        {headshot && (
+            <Fragment>
+                <img class="hero__photo" src={headshot} alt={headshotAlt || ''} loading="eager" decoding="async" />
+                <div class="hero__shade" aria-hidden="true"></div>
+            </Fragment>
+        )}
+        <div class="intro__lines">
+            <span class="intro__line">{greeting}</span>
+            <span class="intro__line"><span class="text-accent">{roleHighlight}</span></span>
+        </div>
+    </div>
+</h1>

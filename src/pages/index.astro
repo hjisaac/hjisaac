@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import EntryCard from '../components/EntryCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SkillsGroup from '../components/SkillsGroup.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
+import { loadCv, getSection } from '../lib/cv';
+import { loadSiteMeta } from '../lib/siteMeta';
+import { parseMarkdownLink } from '../lib/format';
+import {
+    toExperienceCardProps,
+    toEducationCardProps,
+    toProjectCardProps,
+    toSkillsGroups,
+} from '../lib/adapters';
+import type { WorkExperienceEntry, EducationEntry, ProjectEntry } from '../lib/types';
+
+const cv = loadCv();
+const siteMeta = loadSiteMeta();
+
+const experienceEntries = getSection<WorkExperienceEntry>(cv, 'work_experience').map(toExperienceCardProps);
+const educationEntries = getSection<EducationEntry>(cv, 'education').map(toEducationCardProps);
+const projectEntries = getSection<ProjectEntry>(cv, 'projects').map(toProjectCardProps);
+const skillsGroups = toSkillsGroups(cv.skills);
+
+// Footnote markers are auto-incremented in page document order (education, then projects) —
+// cvitae no longer carries per-entry marker numbers, see planning decision.
+let footnoteCounter = 0;
+const educationCards = educationEntries.map((entry) => ({
+    ...entry,
+    footnoteMarker: entry.footnote ? ++footnoteCounter : null,
+}));
+const projectCards = projectEntries.map((entry) => ({
+    ...entry,
+    footnoteMarker: entry.footnote ? ++footnoteCounter : null,
+}));
+
+const emailContact = cv.contact.find((c) => c.name === 'email');
+const linkedinContact = cv.contact.find((c) => c.name === 'linkedin');
+const githubContact = cv.contact.find((c) => c.name === 'github');
+
+const emailLink = emailContact ? parseMarkdownLink(emailContact.value) : null;
+const sameAs = [linkedinContact, githubContact]
+    .map((c) => (c ? parseMarkdownLink(c.value) : null))
+    .filter((link): link is { label: string; url: string } => link !== null)
+    .map((link) => link.url);
+
+const { sections } = siteMeta;
+---
+
+<Layout
+    title={siteMeta.meta.title}
+    description={siteMeta.meta.description}
+    ogImage={siteMeta.intro.headshot}
+    person={{
+        name: cv.name,
+        jobTitle: cv.title,
+        image: siteMeta.intro.headshot,
+        email: emailLink ? emailLink.url.replace(/^mailto:/, '') : undefined,
+        sameAs,
+    }}
+>
+    <Header
+        logoText={siteMeta.header.logo}
+        navItems={siteMeta.nav}
+        menuOpenLabel={siteMeta.ui.menuOpen}
+        menuCloseLabel={siteMeta.ui.menuClose}
+    />
+
+    <main>
+        <Hero
+            greeting={siteMeta.intro.greeting}
+            roleHighlight={siteMeta.intro.roleHighlight}
+            headshot={siteMeta.intro.headshot}
+            headshotAlt={siteMeta.intro.headshotAlt}
+        />
+        <p class="summary high-line-height">{cv.summary}</p>
+
+        <div>
+            <Section id={sections.experience.id} title={sections.experience.title} theme={sections.experience.theme}>
+                {experienceEntries.map((entry) => <EntryCard {...entry} />)}
+            </Section>
+
+            <Section id={sections.education.id} title={sections.education.title} theme={sections.education.theme}>
+                {educationCards.map((entry) => <EntryCard {...entry} />)}
+            </Section>
+
+            <Section id={sections.skills.id} title={sections.skills.title} theme={sections.skills.theme}>
+                {skillsGroups.map((group) => <SkillsGroup {...group} />)}
+            </Section>
+
+            <Section id={sections.projects.id} title={sections.projects.title} theme={sections.projects.theme}>
+                {projectCards.map((entry) => (
+                    <ProjectCard {...entry} viewLiveLabel={siteMeta.ui.projectViewLabel || 'view live'} />
+                ))}
+            </Section>
+
+            <Section id={sections.contact.id} title={sections.contact.title} theme={sections.contact.theme}>
+                <ContactForm
+                    prompt={sections.contact.prompt}
+                    cvFile={sections.contact.cvFile}
+                    downloadIntro={sections.contact.downloadIntro}
+                    downloadLabel={sections.contact.downloadLabel}
+                    form={sections.contact.form}
+                    ui={siteMeta.ui}
+                />
+            </Section>
+
+            <Section id={sections.papers.id} title={sections.papers.title} theme={sections.papers.theme}>
+                {sections.papers.entries.map((paper) => (
+                    <EntryCard kind="paper" titleText={paper.title} meta={paper.meta} />
+                ))}
+            </Section>
+        </div>
+
+        <Footer
+            copyright={siteMeta.footer.copyright}
+            noteBeforeLink={siteMeta.footer.noteBeforeLink}
+            contactLinkLabel={siteMeta.footer.contactLinkLabel}
+            contactHref={siteMeta.footer.contactHref}
+        />
+    </main>
+</Layout>

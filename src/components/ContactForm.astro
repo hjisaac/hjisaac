@@ -1,0 +1,172 @@
+---
+import type { ContactFormMeta } from '../lib/types';
+
+interface Props {
+    prompt?: string;
+    cvFile: string;
+    downloadIntro: string;
+    downloadLabel: string;
+    form: ContactFormMeta;
+    ui: Record<string, string>;
+}
+
+const { prompt, cvFile, downloadIntro, downloadLabel, form, ui } = Astro.props;
+---
+
+<div id="contact-gate" class="section-content">
+    {prompt && <p class="contact-intro">{prompt}</p>}
+    <form id="contact-form" class="contact-form">
+        <div class="contact-form__fields">
+            <div class="contact-form__column contact-form__column--details">
+                <label class="form-field">
+                    <span class="form-label">{form.nameLabel}</span>
+                    <input type="text" name="name" autocomplete="name" />
+                </label>
+                <label class="form-field">
+                    <span class="form-label">{form.emailLabel}</span>
+                    <input type="email" name="email" autocomplete="email" />
+                </label>
+            </div>
+            <div class="contact-form__column contact-form__column--message">
+                <label class="form-field">
+                    <span class="form-label">{form.messageLabel}</span>
+                    <textarea name="message" rows="4" placeholder={form.messagePlaceholder}></textarea>
+                </label>
+            </div>
+        </div>
+        <button class="btn-outline" type="submit">{form.submitLabel}</button>
+        <p id="contact-form-status" class="form-status" aria-live="polite"></p>
+    </form>
+</div>
+
+<div id="contact-download" class="section-content" hidden>
+    <p class="contact-intro">{downloadIntro}</p>
+    <a class="btn-outline" href={cvFile} download>{downloadLabel}</a>
+</div>
+
+<script
+    define:vars={{
+        formSending: ui.formSending,
+        formMissingKey: ui.formMissingKey,
+        formError: ui.formError,
+        formFallbackName: ui.formFallbackName,
+        formFallbackEmail: ui.formFallbackEmail,
+        formFallbackMessage: ui.formFallbackMessage,
+        contactSubject: ui.contactSubject,
+        visitSubject: ui.visitSubject,
+        visitEmail: ui.visitEmail,
+    }}
+>
+    const STORAGE_CV_UNLOCKED = 'cv-unlocked';
+    const STORAGE_VISIT_TRACKED = 'visit-tracked';
+    const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || '';
+    const TRACK_VISITS = import.meta.env.PUBLIC_TRACK_VISITS !== 'false';
+
+    async function submitToWeb3Forms(payload) {
+        if (!WEB3FORMS_ACCESS_KEY) {
+            throw new Error('missing_access_key');
+        }
+
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ access_key: WEB3FORMS_ACCESS_KEY, ...payload }),
+        });
+
+        let result = {};
+        try {
+            result = await response.json();
+        } catch {
+            throw new Error('invalid_response');
+        }
+
+        if (!response.ok || !result.success) {
+            throw new Error(result.message || 'submission_failed');
+        }
+
+        return result;
+    }
+
+    function setFormStatus(element, text, isError = false) {
+        if (!element) return;
+        element.textContent = text;
+        element.classList.toggle('form-status--error', isError);
+    }
+
+    function showCvDownload(gate, download) {
+        gate.hidden = true;
+        download.hidden = false;
+    }
+
+    function initContactGate() {
+        const form = document.getElementById('contact-form');
+        const gate = document.getElementById('contact-gate');
+        const download = document.getElementById('contact-download');
+        const status = document.getElementById('contact-form-status');
+
+        if (!form || !gate || !download) return;
+
+        if (sessionStorage.getItem(STORAGE_CV_UNLOCKED) === 'true') {
+            showCvDownload(gate, download);
+            return;
+        }
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (!submitButton) return;
+
+            const formData = new FormData(form);
+            const name = formData.get('name')?.toString().trim() || formFallbackName;
+            const email = formData.get('email')?.toString().trim() || formFallbackEmail;
+            const message = formData.get('message')?.toString().trim() || formFallbackMessage;
+
+            submitButton.disabled = true;
+            setFormStatus(status, formSending);
+
+            try {
+                await submitToWeb3Forms({
+                    subject: contactSubject,
+                    from_name: name,
+                    email,
+                    message: `${message}\n\n— CV download requested from hjisaac.site`,
+                });
+
+                sessionStorage.setItem(STORAGE_CV_UNLOCKED, 'true');
+                showCvDownload(gate, download);
+            } catch (error) {
+                const messageText = error.message === 'missing_access_key' ? formMissingKey : formError;
+                setFormStatus(status, messageText, true);
+                submitButton.disabled = false;
+            }
+        });
+    }
+
+    async function trackVisit() {
+        if (!WEB3FORMS_ACCESS_KEY || !TRACK_VISITS || sessionStorage.getItem(STORAGE_VISIT_TRACKED) === 'true') {
+            return;
+        }
+
+        try {
+            await submitToWeb3Forms({
+                subject: visitSubject,
+                from_name: 'Site visitor',
+                email: visitEmail,
+                message: [
+                    'Someone opened the site.',
+                    `Page: ${window.location.href}`,
+                    `Referrer: ${document.referrer || 'direct'}`,
+                    `Time: ${new Date().toISOString()}`,
+                ].join('\n'),
+            });
+
+            sessionStorage.setItem(STORAGE_VISIT_TRACKED, 'true');
+        } catch {
+            // Visit tracking must never block the site.
+        }
+    }
+
+    initContactGate();
+    trackVisit();
+</script>

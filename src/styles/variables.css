@@ -1,0 +1,62 @@
+:root {
+    /* Palette — literal colors */
+    --white: #fff;
+    --navy: #000009;
+    --black: #000;
+    --gray: #a0a0a0;
+    --gray-muted: #6f7378;
+    --sky-blue: #45b0eb;
+    --red: #b42318;
+    --border-gray: #d0d0d0;
+    --backdrop-black: rgba(0, 0, 0, 0.55);
+
+    /* Roles — where palette colors are applied */
+    --fg-on-dark: var(--white);
+    --fg-on-light: var(--navy);
+    --fg-muted-on-light: var(--gray-muted);
+    --fg-secondary-on-dark: var(--gray);
+    --bg-page-start: var(--navy);
+    --bg-page-end: var(--black);
+    --bg-section-light: var(--white);
+    --bg-drawer: var(--navy);
+    --bg-input: var(--white);
+    --accent-primary: var(--sky-blue);
+    --accent-error: var(--red);
+
+    /* Spacing */
+    --page-padding: 1.5rem;
+    --content-indent: 2rem;
+    --section-gap: 3rem;
+    --entry-gap: 2rem;
+
+    /* Typography */
+    --font-family: Verdana, Dotum, AppleGothic, sans-serif;
+    --font-size-min: 1.1rem;
+    --font-size-max: 2rem;
+    --font-size-footnote: 0.55em;
+    --font-size-meta: 0.85em;
+    --font-size-tag: 0.75em;
+    --line-height-body: 2em;
+    --line-height-tight: 1.4em;
+    --line-height-content: 1.6em;
+    --line-height-contact: 3.6em;
+    --line-height-intro: 2em;
+
+    /* Layout */
+    --drawer-breakpoint: 1500px;
+    --drawer-width: min(80vw, 280px);
+    --summary-max-width: 65ch;
+
+    /* Effects */
+    --radius-sm: 5px;
+    --border-width-btn: 4px;
+    --border-width-tag: 2px;
+    --shadow-drawer: -4px 0 24px rgba(0, 0, 0, 0.4);
+    --transition-fast: 0.3s ease;
+    --transition-nav: 0.5s;
+
+    /* Z-index */
+    --z-backdrop: 99;
+    --z-drawer: 100;
+    --z-menu-toggle: 101;
+}

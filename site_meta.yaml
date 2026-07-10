@@ -1,6 +1,9 @@
-# Website-specific UI strings
+# Website-specific UI strings and chrome.
+# CV content (experience, education, projects, skills) comes directly from
+# cvitae/outputs/en/general.json at build time — not duplicated here.
 meta:
   title: "Isaac Houngue | Software & Research Engineer"
+  description: "Isaac Houngue is a software and research engineer with MSc backgrounds in Artificial Intelligence and Computer Science, working on machine learning and scientific AI systems."
 header:
   logo: "you're@hjisaac"
 nav:
@@ -19,27 +22,17 @@ nav:
 intro:
   greeting: "I'm Isaac H. J. Houngue,"
   roleHighlight: "a software & research engineer."
-  headshot: "./assets/images/headshot_lower.jpg"
+  headshot: "/assets/images/headshot_lower.jpg"
   headshotAlt: "Isaac Houngue"
-summary_key: "general"
 sections:
   experience:
     id: "experiences"
     title: "#experience"
     theme: "light"
-    items: ["instadeep", "fasfox_backend", "fasfox_frontend", "anac_intern"]
   education:
     id: "education"
     title: "#education"
     theme: "dark"
-    items: ["aims_masters", "imsp_masters"]
-    overrides:
-      aims_masters:
-        title: "MSc Artificial Intelligence — African Institute for Mathematical Sciences (AIMS)"
-        footnoteMarker: "1"
-        footnote: "In partnership with the University of Cape Town."
-      imsp_masters:
-        title: "MSc Computer Science — Institute of Mathematics and Physical Sciences (IMSP)"
   skills:
     id: "skills"
     title: "#skills"
@@ -48,18 +41,12 @@ sections:
     id: "projects"
     title: "#projects"
     theme: "dark"
-    items: ["run_crucible", "billvoicer", "recommender_system", "bvote", "nsequence", "stream_processing"]
-    overrides:
-      billvoicer:
-        bulletsOnly: true
-      recommender_system:
-        view: "https://recommender-system-cixeur34nxyb5prblsl4yt.streamlit.app/"
   contact:
     id: "contact"
     title: "#contact"
     theme: "light"
     prompt: "You'd like us to work together?"
-    cvFile: "./assets/cv/isaac_houngue_cv_may_2026.pdf"
+    cvFile: "/assets/cv/isaac_houngue_cv_may_2026.pdf"
     downloadIntro: "Thanks for saying hello — here is my CV."
     downloadLabel: "Download CV (PDF)"
     form:
@@ -86,7 +73,7 @@ ui:
   menuOpen: "Open menu"
   menuClose: "Close menu"
   formSending: "Sending…"
-  formMissingKey: "Form is not configured yet. Add your access key to config/site-config.js."
+  formMissingKey: "Form is not configured yet. Add your access key to .env."
   formError: "Something went wrong. Please try again or email me directly."
   formFallbackName: "Anonymous"
   formFallbackEmail: "not provided"

@@ -1,0 +1,13 @@
+---
+interface Props {
+    label: string;
+    items: string;
+}
+
+const { label, items } = Astro.props;
+---
+
+<div class="skills-group">
+    <h3 class="skills-label">{label}</h3>
+    <p class="skills-list">{items}</p>
+</div>

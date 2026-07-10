@@ -1,0 +1,122 @@
+---
+import Logo from './Logo.astro';
+import Nav from './Nav.astro';
+import type { NavItem } from '../lib/types';
+
+interface Props {
+    logoText: string;
+    navItems: NavItem[];
+    menuOpenLabel: string;
+    menuCloseLabel: string;
+}
+
+const { logoText, navItems, menuOpenLabel, menuCloseLabel } = Astro.props;
+---
+
+<header class="site-header">
+    <Logo text={logoText} />
+
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label={menuOpenLabel}>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+    </button>
+
+    <div class="nav-backdrop" aria-hidden="true"></div>
+
+    <Nav items={navItems} />
+</header>
+
+<script define:vars={{ menuOpenLabel, menuCloseLabel }}>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.horizontal-nav');
+    const backdrop = document.querySelector('.nav-backdrop');
+    const root = document.documentElement;
+
+    if (toggle && nav && backdrop) {
+        let navLinks = nav.querySelectorAll('a');
+
+        function getDrawerMediaQuery() {
+            const breakpoint = getComputedStyle(document.documentElement)
+                .getPropertyValue('--drawer-breakpoint')
+                .trim() || '1500px';
+            return window.matchMedia(`(max-width: ${breakpoint})`);
+        }
+
+        const drawerMediaQuery = getDrawerMediaQuery();
+
+        function setScrollLock(locked) {
+            const value = locked ? 'hidden' : '';
+            root.style.overflow = value;
+            document.body.style.overflow = value;
+        }
+
+        function openNav() {
+            nav.classList.add('is-open');
+            backdrop.classList.add('is-visible');
+            backdrop.setAttribute('aria-hidden', 'false');
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.setAttribute('aria-label', menuCloseLabel || 'Close menu');
+            setScrollLock(true);
+        }
+
+        function closeNav() {
+            if (!nav.classList.contains('is-open')) {
+                return;
+            }
+
+            nav.classList.remove('is-open');
+            backdrop.classList.remove('is-visible');
+            backdrop.setAttribute('aria-hidden', 'true');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', menuOpenLabel || 'Open menu');
+            setScrollLock(false);
+        }
+
+        function toggleNav() {
+            if (nav.classList.contains('is-open')) {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+
+        function closeNavOnScrollAttempt(event) {
+            if (!nav.classList.contains('is-open') || nav.contains(event.target)) {
+                return;
+            }
+            closeNav();
+        }
+
+        function updateDrawerMode() {
+            root.classList.toggle('use-drawer', drawerMediaQuery.matches);
+            if (!drawerMediaQuery.matches) {
+                closeNav();
+            }
+        }
+
+        function bindNavLinks() {
+            navLinks = nav.querySelectorAll('a');
+            navLinks.forEach((link) => {
+                link.addEventListener('click', closeNav);
+            });
+        }
+
+        toggle.addEventListener('click', toggleNav);
+        backdrop.addEventListener('click', closeNav);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeNav();
+            }
+        });
+
+        window.addEventListener('scroll', closeNav, { passive: true });
+        document.addEventListener('wheel', closeNavOnScrollAttempt, { passive: true });
+        document.addEventListener('touchmove', closeNavOnScrollAttempt, { passive: true });
+        drawerMediaQuery.addEventListener('change', updateDrawerMode);
+
+        bindNavLinks();
+        updateDrawerMode();
+    }
+</script>

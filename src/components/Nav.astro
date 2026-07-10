@@ -1,0 +1,17 @@
+---
+import type { NavItem } from '../lib/types';
+
+interface Props {
+    items: NavItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav id="site-nav" class="horizontal-nav">
+    <ol>
+        {items.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+        ))}
+    </ol>
+</nav>

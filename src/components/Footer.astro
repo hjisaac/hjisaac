@@ -1,0 +1,17 @@
+---
+interface Props {
+    copyright: string;
+    noteBeforeLink: string;
+    contactLinkLabel: string;
+    contactHref: string;
+}
+
+const { copyright, noteBeforeLink, contactLinkLabel, contactHref } = Astro.props;
+---
+
+<footer class="site-footer">
+    <p class="site-footer__copyright">{copyright}</p>
+    <p class="site-footer__note">
+        {noteBeforeLink}<a class="site-footer__link" href={contactHref || '#contact'}>{contactLinkLabel || 'contact form'}</a>.
+    </p>
+</footer>
