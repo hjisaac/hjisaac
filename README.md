@@ -2,7 +2,7 @@
 
 Personal portfolio site, built with [Astro](https://astro.build) and pre-rendered to static HTML for real SEO (content is in the page source, not injected by client-side JS).
 
-CV content (experience, education, projects, skills) comes from the `cvitae` submodule's build output, not from this repo directly — see [Content](#content) below.
+CV content (experience, education, projects, skills, papers) comes from the `cvitae` submodule's build output, not from this repo directly — see [Content](#content) below.
 
 ## Development
 
@@ -29,8 +29,8 @@ npm run build
 
 | Goal | File |
 |------|------|
-| CV content (jobs, education, projects, skills) | `cvitae/contents/cv_variants/general.yaml` (see `cvitae/README.md`) |
-| Site chrome — nav, section titles/themes, contact form copy, footer, papers list | `site_meta.yaml` |
+| CV content (jobs, education, projects, skills, papers) | `cvitae/contents/cv_variants/general.yaml` (see `cvitae/README.md`) |
+| Site chrome — nav, section titles/themes, contact form copy, footer | directly in the relevant component (`src/components/Header.astro`, `Hero.astro`, `Footer.astro`, `ContactForm.astro`) or `src/pages/index.astro` for page title/description and section order |
 | Colors, spacing, breakpoints | `src/styles/variables.css` (palette + role tokens) |
 | Page components | `src/components/`, `src/pages/index.astro` |
 | Web3Forms key, visit tracking | `.env` (copy from `.env.example`) |

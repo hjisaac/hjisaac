@@ -3,8 +3,8 @@ import { GITHUB_ICON_PATH, isSafeHttpUrl, mdInlineToHtml } from '../lib/format';
 
 interface Props {
     title: string;
-    codeUrl?: string | null;
-    demoUrl?: string | null;
+    code_url?: string | null;
+    demo_url?: string | null;
     meta: string;
     details?: string[] | null;
     summary?: string | null;
@@ -14,18 +14,18 @@ interface Props {
     viewLiveLabel: string;
 }
 
-const { title, codeUrl, demoUrl, meta, details, summary, tools, footnote, footnoteMarker, viewLiveLabel } = Astro.props;
+const { title, code_url, demo_url, meta, details, summary, tools, footnote, footnoteMarker, viewLiveLabel } = Astro.props;
 
-const hasGithubLink = isSafeHttpUrl(codeUrl);
-const hasDemoLink = isSafeHttpUrl(demoUrl);
+const hasGithubLink = isSafeHttpUrl(code_url);
+const hasDemoLink = isSafeHttpUrl(demo_url);
 ---
 
 <article class="entry">
     <header class="entry-header">
         <div class="entry-title-row">
-            {codeUrl && (
+            {code_url && (
                 hasGithubLink ? (
-                    <a class="project-github-link" href={codeUrl} target="_blank" rel="noopener noreferrer" aria-label={`${title} on GitHub`}>
+                    <a class="project-github-link" href={code_url} target="_blank" rel="noopener noreferrer" aria-label={`${title} on GitHub`}>
                         <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d={GITHUB_ICON_PATH} /></svg>
                     </a>
                 ) : (
@@ -44,7 +44,7 @@ const hasDemoLink = isSafeHttpUrl(demoUrl);
             {hasDemoLink && (
                 <Fragment>
                     {' · '}
-                    <a class="entry-meta-link" href={demoUrl} target="_blank" rel="noopener noreferrer">{viewLiveLabel}</a>
+                    <a class="entry-meta-link" href={demo_url} target="_blank" rel="noopener noreferrer">{viewLiveLabel}</a>
                 </Fragment>
             )}
         </p>
@@ -62,7 +62,12 @@ const hasDemoLink = isSafeHttpUrl(demoUrl);
 
     {tools.length > 0 && (
         <p class="entry-tools">
-            {tools.map((tool) => <span class="tool-tag">{tool}</span>)}
+            {tools.map((tool, index) => (
+                <Fragment>
+                    {index > 0 && ', '}
+                    <span class="tool-tag">{tool}</span>
+                </Fragment>
+            ))}
         </p>
     )}
 

@@ -1,17 +1,24 @@
 ---
+import LocaleSwitch from './LocaleSwitch.astro';
+import type { Locale } from '../i18n/locales';
+
 interface Props {
+    locale: Locale;
     copyright: string;
-    noteBeforeLink: string;
-    contactLinkLabel: string;
-    contactHref: string;
+    note_before_link: string;
+    contact_link_label: string;
+    contact_href: string;
 }
 
-const { copyright, noteBeforeLink, contactLinkLabel, contactHref } = Astro.props;
+const { locale, copyright, note_before_link, contact_link_label, contact_href } = Astro.props;
 ---
 
 <footer class="site-footer">
     <p class="site-footer__copyright">{copyright}</p>
-    <p class="site-footer__note">
-        {noteBeforeLink}<a class="site-footer__link" href={contactHref || '#contact'}>{contactLinkLabel || 'contact form'}</a>.
-    </p>
+    <div class="site-footer__bottom-row">
+        <p class="site-footer__note">
+            {note_before_link}<a class="site-footer__link" href={contact_href}>{contact_link_label}</a>.
+        </p>
+        <LocaleSwitch locale={locale} />
+    </div>
 </footer>

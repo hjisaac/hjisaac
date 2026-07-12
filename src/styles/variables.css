@@ -31,8 +31,10 @@
 
     /* Typography */
     --font-family: Verdana, Dotum, AppleGothic, sans-serif;
-    --font-size-min: 1.1rem;
-    --font-size-max: 2rem;
+    --font-size-min: 0.95rem;
+    --font-size-max: 1.6rem;
+    --font-size-intro-min: 1.1rem;
+    --font-size-intro-max: 2rem;
     --font-size-footnote: 0.55em;
     --font-size-meta: 0.85em;
     --font-size-tag: 0.75em;

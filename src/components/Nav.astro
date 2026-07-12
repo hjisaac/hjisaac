@@ -1,5 +1,8 @@
 ---
-import type { NavItem } from '../lib/types';
+interface NavItem {
+    href: string;
+    label: string;
+}
 
 interface Props {
     items: NavItem[];

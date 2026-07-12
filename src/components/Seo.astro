@@ -1,26 +1,42 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SUPPORTED_LOCALES, DEFAULT_LOCALE } from '../i18n/locales';
+import type { Locale } from '../i18n/locales';
+
 interface Props {
+    locale: Locale;
     title: string;
     description: string;
     ogImage?: string;
     ogType?: string;
 }
 
-const { title, description, ogImage, ogType = 'website' } = Astro.props;
+const { locale, title, description, ogImage, ogType = 'website' } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const resolvedOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
+
+// Open Graph expects language_TERRITORY (e.g. "en_US"), not a bare language tag.
+const OG_LOCALE: Record<Locale, string> = { en: 'en_US', fr: 'fr_FR' };
+const otherOgLocales = SUPPORTED_LOCALES.filter((l) => l !== locale).map((l) => OG_LOCALE[l]);
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalUrl} />
 
+{SUPPORTED_LOCALES.map((l) => (
+    <link rel="alternate" hreflang={l} href={new URL(getRelativeLocaleUrl(l, '/'), Astro.site)} />
+))}
+<link rel="alternate" hreflang="x-default" href={new URL(getRelativeLocaleUrl(DEFAULT_LOCALE, '/'), Astro.site)} />
+
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:site_name" content={title} />
+<meta property="og:locale" content={OG_LOCALE[locale]} />
+{otherOgLocales.map((l) => <meta property="og:locale:alternate" content={l} />)}
 {resolvedOgImage && <meta property="og:image" content={resolvedOgImage} />}
 
 <meta name="twitter:card" content="summary_large_image" />

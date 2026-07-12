@@ -1,25 +1,21 @@
 ---
 interface Props {
     greeting: string;
-    roleHighlight: string;
-    headshot?: string;
-    headshotAlt?: string;
+    role_highlight: string;
+    headshot: string;
+    headshot_alt: string;
 }
 
-const { greeting, roleHighlight, headshot, headshotAlt } = Astro.props;
+const { greeting, role_highlight, headshot, headshot_alt } = Astro.props;
 ---
 
 <h1 id="self-intro">
     <div class="hero">
-        {headshot && (
-            <Fragment>
-                <img class="hero__photo" src={headshot} alt={headshotAlt || ''} loading="eager" decoding="async" />
-                <div class="hero__shade" aria-hidden="true"></div>
-            </Fragment>
-        )}
+        <img class="hero__photo" src={headshot} alt={headshot_alt} loading="eager" decoding="async" />
+        <div class="hero__shade" aria-hidden="true"></div>
         <div class="intro__lines">
             <span class="intro__line">{greeting}</span>
-            <span class="intro__line"><span class="text-accent">{roleHighlight}</span></span>
+            <span class="intro__line"><span class="text-accent">{role_highlight}</span></span>
         </div>
     </div>
 </h1>

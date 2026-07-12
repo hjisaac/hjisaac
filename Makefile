@@ -1,10 +1,14 @@
-.PHONY: build-cv build update-submodules deploy
+.PHONY: build-cv build dev update-submodules deploy
 
 build-cv:
-	cd cvitae && make build
+	cd cvitae && make build && make schema
+	npm run gen:types
 
 build:
 	npm run build
+
+dev:
+	npm run dev
 
 update-submodules:
 	git submodule update --remote

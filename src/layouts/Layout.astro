@@ -1,8 +1,10 @@
 ---
 import Seo from '../components/Seo.astro';
 import '../styles/global.css';
+import type { Locale } from '../i18n/locales';
 
 interface Props {
+    locale: Locale;
     title: string;
     description: string;
     ogImage?: string;
@@ -15,7 +17,7 @@ interface Props {
     };
 }
 
-const { title, description, ogImage, person } = Astro.props;
+const { locale, title, description, ogImage, person } = Astro.props;
 
 const personJsonLd = {
     '@context': 'https://schema.org',
@@ -30,12 +32,12 @@ const personJsonLd = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <Seo title={title} description={description} ogImage={ogImage} />
+    <Seo locale={locale} title={title} description={description} ogImage={ogImage} />
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
 </head>
 <body>

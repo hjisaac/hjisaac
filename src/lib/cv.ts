@@ -2,15 +2,14 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import type { CvData, CvSection } from './types';
 
-const CV_PATH = fileURLToPath(new URL('../../cvitae/outputs/en/general.json', import.meta.url));
-
-export function loadCv(): CvData {
-    const raw = readFileSync(CV_PATH, 'utf-8');
+export function loadCv(locale: string): CvData {
+    const cvPath = fileURLToPath(new URL(`../../cvitae/outputs/${locale}/general.json`, import.meta.url));
+    const raw = readFileSync(cvPath, 'utf-8');
     const cv = JSON.parse(raw) as CvData;
 
     if (!cv?.name || !Array.isArray(cv.sections)) {
         throw new Error(
-            `Invalid cvitae build output at ${CV_PATH} — missing "name" or "sections". ` +
+            `Invalid cvitae build output at ${cvPath} — missing "name" or "sections". ` +
             'Run `cd cvitae && make build` to (re)generate it.',
         );
     }

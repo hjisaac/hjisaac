@@ -4,8 +4,8 @@ import { isSafeHttpUrl, mdInlineToHtml } from '../lib/format';
 interface Props {
     kind: 'experience' | 'education' | 'paper';
     titleText: string;
-    orgText?: string | null;
-    orgUrl?: string | null;
+    organization?: string | null;
+    organization_url?: string | null;
     meta: string;
     details?: string[] | null;
     summary?: string | null;
@@ -13,10 +13,10 @@ interface Props {
     footnoteMarker?: number | null;
 }
 
-const { kind, titleText, orgText, orgUrl, meta, details, summary, footnote, footnoteMarker } = Astro.props;
+const { kind, titleText, organization, organization_url, meta, details, summary, footnote, footnoteMarker } = Astro.props;
 
 const isExperience = kind === 'experience';
-const experienceOrgIsLink = isExperience && orgText && orgUrl && isSafeHttpUrl(orgUrl);
+const experienceOrgIsLink = isExperience && organization && organization_url && isSafeHttpUrl(organization_url);
 ---
 
 <article class="entry">
@@ -26,12 +26,12 @@ const experienceOrgIsLink = isExperience && orgText && orgUrl && isSafeHttpUrl(o
                 <Fragment>
                     {titleText} —{' '}
                     {experienceOrgIsLink
-                        ? <a class="entry-org-link" href={orgUrl} target="_blank" rel="noopener noreferrer">{orgText}</a>
-                        : orgText}
+                        ? <a class="entry-org-link" href={organization_url} target="_blank" rel="noopener noreferrer">{organization}</a>
+                        : organization}
                 </Fragment>
             ) : (
                 <Fragment>
-                    {orgText ? `${titleText} — ${orgText}` : titleText}
+                    {organization ? `${titleText} — ${organization}` : titleText}
                     {footnoteMarker != null && <sup class="footnote-ref">{footnoteMarker}</sup>}
                 </Fragment>
             )}

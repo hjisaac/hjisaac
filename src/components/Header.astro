@@ -1,33 +1,35 @@
 ---
 import Logo from './Logo.astro';
 import Nav from './Nav.astro';
-import type { NavItem } from '../lib/types';
+import type { NavItem } from '../i18n/site_locale/types';
 
 interface Props {
-    logoText: string;
-    navItems: NavItem[];
-    menuOpenLabel: string;
-    menuCloseLabel: string;
+    logo: string;
+    nav: NavItem[];
+    menu_open: string;
+    menu_close: string;
 }
 
-const { logoText, navItems, menuOpenLabel, menuCloseLabel } = Astro.props;
+const { logo, nav, menu_open, menu_close } = Astro.props;
 ---
 
 <header class="site-header">
-    <Logo text={logoText} />
+    <Logo text={logo} />
 
-    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label={menuOpenLabel}>
-        <span class="menu-toggle__bar"></span>
-        <span class="menu-toggle__bar"></span>
-        <span class="menu-toggle__bar"></span>
-    </button>
+    <div class="site-header__right">
+        <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label={menu_open}>
+            <span class="menu-toggle__bar"></span>
+            <span class="menu-toggle__bar"></span>
+            <span class="menu-toggle__bar"></span>
+        </button>
+
+        <Nav items={nav} />
+    </div>
 
     <div class="nav-backdrop" aria-hidden="true"></div>
-
-    <Nav items={navItems} />
 </header>
 
-<script define:vars={{ menuOpenLabel, menuCloseLabel }}>
+<script define:vars={{ menu_open, menu_close }}>
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.horizontal-nav');
     const backdrop = document.querySelector('.nav-backdrop');
@@ -56,7 +58,7 @@ const { logoText, navItems, menuOpenLabel, menuCloseLabel } = Astro.props;
             backdrop.classList.add('is-visible');
             backdrop.setAttribute('aria-hidden', 'false');
             toggle.setAttribute('aria-expanded', 'true');
-            toggle.setAttribute('aria-label', menuCloseLabel || 'Close menu');
+            toggle.setAttribute('aria-label', menu_close);
             setScrollLock(true);
         }
 
@@ -69,7 +71,7 @@ const { logoText, navItems, menuOpenLabel, menuCloseLabel } = Astro.props;
             backdrop.classList.remove('is-visible');
             backdrop.setAttribute('aria-hidden', 'true');
             toggle.setAttribute('aria-expanded', 'false');
-            toggle.setAttribute('aria-label', menuOpenLabel || 'Open menu');
+            toggle.setAttribute('aria-label', menu_open);
             setScrollLock(false);
         }
 

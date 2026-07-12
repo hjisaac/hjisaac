@@ -1,60 +1,56 @@
 ---
-import type { ContactFormMeta } from '../lib/types';
+import type { ContactFormMeta } from '../i18n/site_locale/types';
 
 interface Props {
-    prompt?: string;
-    cvFile: string;
-    downloadIntro: string;
-    downloadLabel: string;
+    prompt: string;
+    cv_file: string;
+    download_intro: string;
+    download_label: string;
     form: ContactFormMeta;
-    ui: Record<string, string>;
+    ui: {
+        form_sending: string;
+        form_missing_key: string;
+        form_error: string;
+        form_fallback_name: string;
+        form_fallback_email: string;
+        form_fallback_message: string;
+        contact_subject: string;
+        visit_subject: string;
+        visit_email: string;
+    };
 }
 
-const { prompt, cvFile, downloadIntro, downloadLabel, form, ui } = Astro.props;
+const { prompt, cv_file, download_intro, download_label, form, ui } = Astro.props;
 ---
 
 <div id="contact-gate" class="section-content">
-    {prompt && <p class="contact-intro">{prompt}</p>}
+    <p class="contact-intro">{prompt}</p>
     <form id="contact-form" class="contact-form">
-        <div class="contact-form__fields">
-            <div class="contact-form__column contact-form__column--details">
-                <label class="form-field">
-                    <span class="form-label">{form.nameLabel}</span>
-                    <input type="text" name="name" autocomplete="name" />
-                </label>
-                <label class="form-field">
-                    <span class="form-label">{form.emailLabel}</span>
-                    <input type="email" name="email" autocomplete="email" />
-                </label>
-            </div>
-            <div class="contact-form__column contact-form__column--message">
-                <label class="form-field">
-                    <span class="form-label">{form.messageLabel}</span>
-                    <textarea name="message" rows="4" placeholder={form.messagePlaceholder}></textarea>
-                </label>
-            </div>
-        </div>
-        <button class="btn-outline" type="submit">{form.submitLabel}</button>
+        <label class="form-field">
+            <span class="form-label">{form.message_label}</span>
+            <textarea name="message" rows="4" placeholder={form.message_placeholder}></textarea>
+        </label>
+        <button class="btn-outline" type="submit">{form.submit_label}</button>
         <p id="contact-form-status" class="form-status" aria-live="polite"></p>
     </form>
 </div>
 
 <div id="contact-download" class="section-content" hidden>
-    <p class="contact-intro">{downloadIntro}</p>
-    <a class="btn-outline" href={cvFile} download>{downloadLabel}</a>
+    <p class="contact-intro">{download_intro}</p>
+    <a class="btn-outline" href={cv_file} download>{download_label}</a>
 </div>
 
 <script
     define:vars={{
-        formSending: ui.formSending,
-        formMissingKey: ui.formMissingKey,
-        formError: ui.formError,
-        formFallbackName: ui.formFallbackName,
-        formFallbackEmail: ui.formFallbackEmail,
-        formFallbackMessage: ui.formFallbackMessage,
-        contactSubject: ui.contactSubject,
-        visitSubject: ui.visitSubject,
-        visitEmail: ui.visitEmail,
+        formSending: ui.form_sending,
+        formMissingKey: ui.form_missing_key,
+        formError: ui.form_error,
+        formFallbackName: ui.form_fallback_name,
+        formFallbackEmail: ui.form_fallback_email,
+        formFallbackMessage: ui.form_fallback_message,
+        contactSubject: ui.contact_subject,
+        visitSubject: ui.visit_subject,
+        visitEmail: ui.visit_email,
     }}
 >
     const STORAGE_CV_UNLOCKED = 'cv-unlocked';
@@ -118,8 +114,6 @@ const { prompt, cvFile, downloadIntro, downloadLabel, form, ui } = Astro.props;
             if (!submitButton) return;
 
             const formData = new FormData(form);
-            const name = formData.get('name')?.toString().trim() || formFallbackName;
-            const email = formData.get('email')?.toString().trim() || formFallbackEmail;
             const message = formData.get('message')?.toString().trim() || formFallbackMessage;
 
             submitButton.disabled = true;
@@ -128,8 +122,8 @@ const { prompt, cvFile, downloadIntro, downloadLabel, form, ui } = Astro.props;
             try {
                 await submitToWeb3Forms({
                     subject: contactSubject,
-                    from_name: name,
-                    email,
+                    from_name: formFallbackName,
+                    email: formFallbackEmail,
                     message: `${message}\n\n— CV download requested from hjisaac.site`,
                 });
 

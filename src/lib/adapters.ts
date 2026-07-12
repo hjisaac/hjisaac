@@ -1,22 +1,12 @@
-import type { EducationEntry, ProjectEntry, WorkExperienceEntry, CvSkills } from './types';
+import type { EducationItem, PaperItem, ProjectItem, WorkExperienceItem } from './types.generated';
+import type { CvSkills } from './types';
 import { normalizeDateRange, SKILL_LABELS } from './format';
 
-export interface ExperienceCardProps {
-    kind: 'experience';
+export interface EntryCardProps {
+    kind: 'experience' | 'education' | 'paper';
     titleText: string;
-    orgText: string | null;
-    orgUrl: string | null;
-    meta: string;
-    details: string[] | null;
-    summary: string | null;
-    footnote: string | null;
-}
-
-export interface EducationCardProps {
-    kind: 'education';
-    titleText: string;
-    orgText: string | null;
-    orgUrl: string | null;
+    organization: string | null;
+    organization_url: string | null;
     meta: string;
     details: string[] | null;
     summary: string | null;
@@ -25,8 +15,8 @@ export interface EducationCardProps {
 
 export interface ProjectCardProps {
     title: string;
-    codeUrl: string | null;
-    demoUrl: string | null;
+    code_url: string | null;
+    demo_url: string | null;
     meta: string;
     details: string[] | null;
     summary: string | null;
@@ -39,15 +29,15 @@ export interface SkillsGroupProps {
     items: string;
 }
 
-export function toExperienceCardProps(entry: WorkExperienceEntry): ExperienceCardProps {
+export function toExperienceCardProps(entry: WorkExperienceItem): EntryCardProps {
     const dates = normalizeDateRange(entry.dates);
     const meta = entry.location ? `${dates} · ${entry.location}` : dates;
 
     return {
         kind: 'experience',
-        titleText: entry.role,
-        orgText: entry.organization ?? null,
-        orgUrl: entry.organization_url ?? null,
+        titleText: entry.title,
+        organization: entry.organization ?? null,
+        organization_url: entry.organization_url ?? null,
         meta,
         details: entry.details ?? null,
         summary: entry.summary ?? null,
@@ -55,15 +45,15 @@ export function toExperienceCardProps(entry: WorkExperienceEntry): ExperienceCar
     };
 }
 
-export function toEducationCardProps(entry: EducationEntry): EducationCardProps {
+export function toEducationCardProps(entry: EducationItem): EntryCardProps {
     const dates = normalizeDateRange(entry.dates);
     const meta = entry.location ? `${dates} · ${entry.location}` : dates;
 
     return {
         kind: 'education',
-        titleText: entry.degree,
-        orgText: entry.organization ?? null,
-        orgUrl: entry.organization_url ?? null,
+        titleText: entry.title,
+        organization: entry.organization ?? null,
+        organization_url: entry.organization_url ?? null,
         meta,
         details: entry.details ?? null,
         summary: entry.summary ?? null,
@@ -71,16 +61,29 @@ export function toEducationCardProps(entry: EducationEntry): EducationCardProps 
     };
 }
 
-export function toProjectCardProps(entry: ProjectEntry): ProjectCardProps {
+export function toProjectCardProps(entry: ProjectItem): ProjectCardProps {
     return {
         title: entry.title,
-        codeUrl: entry.code_url ?? null,
-        demoUrl: entry.demo_url ?? null,
+        code_url: entry.code_url ?? null,
+        demo_url: entry.demo_url ?? null,
         meta: normalizeDateRange(entry.dates),
         details: entry.details ?? null,
         summary: entry.summary ?? null,
         tools: entry.tools ?? [],
         footnote: entry.footnote ?? null,
+    };
+}
+
+export function toPaperCardProps(entry: PaperItem): EntryCardProps {
+    return {
+        kind: 'paper',
+        titleText: entry.title,
+        organization: null,
+        organization_url: null,
+        meta: `${entry.type} · ${entry.organization} · ${normalizeDateRange(entry.dates)}`,
+        details: null,
+        summary: null,
+        footnote: null,
     };
 }
 
