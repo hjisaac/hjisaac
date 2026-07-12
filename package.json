@@ -1,0 +1,23 @@
+{
+  "name": "hjisaac.site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "prebuild": "tsx scripts/check-translations.ts",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "gen:types": "node scripts/generate-types.mjs",
+    "check:translations": "tsx scripts/check-translations.ts"
+  },
+  "dependencies": {
+    "astro": "^5.3.0",
+    "@astrojs/sitemap": "^3.2.1"
+  },
+  "devDependencies": {
+    "json-schema-to-typescript": "^15.0.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

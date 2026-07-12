@@ -1,0 +1,23 @@
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    background-image: linear-gradient(to bottom right, var(--bg-page-start), var(--bg-page-end));
+    color: var(--fg-on-dark);
+    font: 0.75em var(--font-family);
+    font-size: clamp(var(--font-size-min), 2.5vw + 0.75rem, var(--font-size-max));
+    padding: 0;
+    margin-left: var(--page-padding);
+    margin-right: var(--page-padding);
+    letter-spacing: 0.01em;
+    line-height: var(--line-height-body);
+    font-weight: 500;
+}

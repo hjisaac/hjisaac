@@ -1,2 +1,7 @@
-config/site-config.js
 **/__pycache__/
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example

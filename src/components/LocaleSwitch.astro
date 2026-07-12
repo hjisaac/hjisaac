@@ -1,0 +1,25 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { Locale } from '../i18n/locales';
+import { SUPPORTED_LOCALES } from '../i18n/locales';
+
+interface Props {
+    locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const LOCALE_FLAG: Record<Locale, string> = { en: '🇬🇧', fr: '🇫🇷' };
+const LOCALE_NAME: Record<Locale, string> = { en: 'English', fr: 'Français' };
+const otherLocale = SUPPORTED_LOCALES.find((l) => l !== locale)!;
+---
+
+<a
+    class="locale-switch"
+    href={getRelativeLocaleUrl(otherLocale, '/')}
+    hreflang={otherLocale}
+    aria-label={`Switch to ${LOCALE_NAME[otherLocale]}`}
+>
+    <span aria-hidden="true">{LOCALE_FLAG[otherLocale]}</span>
+    <span class="locale-switch__label">{LOCALE_NAME[otherLocale]}</span>
+</a>

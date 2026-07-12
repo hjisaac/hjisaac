@@ -1,0 +1,46 @@
+---
+import Seo from '../components/Seo.astro';
+import '../styles/global.css';
+import type { Locale } from '../i18n/locales';
+
+interface Props {
+    locale: Locale;
+    title: string;
+    description: string;
+    ogImage?: string;
+    person: {
+        name: string;
+        jobTitle: string;
+        image?: string;
+        email?: string;
+        sameAs: string[];
+    };
+}
+
+const { locale, title, description, ogImage, person } = Astro.props;
+
+const personJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: person.name,
+    jobTitle: person.jobTitle,
+    url: Astro.site?.toString(),
+    ...(person.image ? { image: new URL(person.image, Astro.site).toString() } : {}),
+    ...(person.email ? { email: `mailto:${person.email}` } : {}),
+    ...(person.sameAs.length ? { sameAs: person.sameAs } : {}),
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <Seo locale={locale} title={title} description={description} ogImage={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+</head>
+<body>
+    <slot />
+</body>
+</html>

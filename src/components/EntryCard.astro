@@ -1,0 +1,57 @@
+---
+import { isSafeHttpUrl, mdInlineToHtml } from '../lib/format';
+
+interface Props {
+    kind: 'experience' | 'education' | 'paper';
+    titleText: string;
+    organization?: string | null;
+    organization_url?: string | null;
+    meta: string;
+    details?: string[] | null;
+    summary?: string | null;
+    footnote?: string | null;
+    footnoteMarker?: number | null;
+}
+
+const { kind, titleText, organization, organization_url, meta, details, summary, footnote, footnoteMarker } = Astro.props;
+
+const isExperience = kind === 'experience';
+const experienceOrgIsLink = isExperience && organization && organization_url && isSafeHttpUrl(organization_url);
+---
+
+<article class="entry">
+    <header class="entry-header">
+        <h3 class="entry-title">
+            {isExperience ? (
+                <Fragment>
+                    {titleText} —{' '}
+                    {experienceOrgIsLink
+                        ? <a class="entry-org-link" href={organization_url} target="_blank" rel="noopener noreferrer">{organization}</a>
+                        : organization}
+                </Fragment>
+            ) : (
+                <Fragment>
+                    {organization ? `${titleText} — ${organization}` : titleText}
+                    {footnoteMarker != null && <sup class="footnote-ref">{footnoteMarker}</sup>}
+                </Fragment>
+            )}
+        </h3>
+        <p class="entry-meta">{meta}</p>
+    </header>
+
+    {details && details.length > 0 ? (
+        <ul class="entry-list">
+            {details.map((item) => (
+                <li set:html={mdInlineToHtml(item)} />
+            ))}
+        </ul>
+    ) : summary && (
+        <p class="entry-summary" set:html={mdInlineToHtml(summary)} />
+    )}
+
+    {footnote && (
+        <p class="entry-footnote">
+            {footnoteMarker != null && <sup>{footnoteMarker}</sup>} {footnote}
+        </p>
+    )}
+</article>
