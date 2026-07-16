@@ -26,7 +26,7 @@ const experienceOrgIsLink = isExperience && organization && organization_url && 
                 <Fragment>
                     {titleText} —{' '}
                     {experienceOrgIsLink
-                        ? <a class="entry-org-link" href={organization_url} target="_blank" rel="noopener noreferrer">{organization}</a>
+                        ? <a class="entry-inline-link" href={organization_url} target="_blank" rel="noopener noreferrer">{organization}</a>
                         : organization}
                 </Fragment>
             ) : (

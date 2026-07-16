@@ -38,6 +38,7 @@ export interface SiteLocale {
             form: ContactFormMeta;
         };
         papers: SectionMeta;
+        articles: SectionMeta;
     };
     footer: {
         copyright: string;

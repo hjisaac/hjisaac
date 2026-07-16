@@ -43,6 +43,7 @@ export const siteLocale: SiteLocale = {
             },
         },
         papers: { id: 'papers', title: '#publications', theme: 'dark' },
+        articles: { id: 'articles', title: '#articles', theme: 'light' },
     },
     footer: {
         copyright: '© 2022–2026 Isaac H. J. Houngue',

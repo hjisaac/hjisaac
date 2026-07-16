@@ -171,6 +171,10 @@ nav.horizontal-nav ol li a:hover::after {
    a visitor sees, deliberately bigger than section/body copy. */
 .intro-block {
     font-size: clamp(var(--font-size-intro-min), 2.5vw + 0.75rem, var(--font-size-intro-max));
+    /* Prevents .summary's margin-bottom from collapsing with the next section's
+       margin-top (both are otherwise unstyled block boxes) — without this, the
+       two margins would merge into whichever is larger instead of adding up. */
+    display: flow-root;
 }
 
 #self-intro {
@@ -180,7 +184,7 @@ nav.horizontal-nav ol li a:hover::after {
 .hero {
     position: relative;
     min-height: min(36vw, 320px);
-    padding: 1rem 0 2.5rem;
+    padding: 3rem 0 2.5rem;
 }
 
 .hero__photo {
@@ -248,6 +252,7 @@ section {
 
 .summary {
     line-height: 1.7em;
+    margin-bottom: 2rem;
 }
 
 .entry {
@@ -337,22 +342,19 @@ section {
     opacity: 1;
 }
 
-.entry-meta-link {
+/* Shared style for every link inside content sections — company names,
+   "view live", and inline links in bullet/summary text (see mdInlineToHtml).
+   Visible by default (not hover-only): a hover-only affordance is
+   indistinguishable from plain text until the user happens to hover it,
+   which never happens on touch devices at all. */
+.entry-inline-link {
     color: inherit;
     text-decoration: none;
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
     transition: border-color var(--transition-nav), color var(--transition-nav);
 }
 
-.entry-org-link {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: border-color var(--transition-nav), color var(--transition-nav);
-}
-
-.entry-meta-link:hover,
-.entry-org-link:hover {
+.entry-inline-link:hover {
     color: var(--accent-primary);
     border-bottom-color: var(--accent-primary);
 }
@@ -644,3 +646,6 @@ html.use-drawer nav.horizontal-nav ol {
         scroll-behavior: auto !important;
     }
 }
+
+/* Articles are read on GitHub itself (see ARTICLES_GITHUB_BASE) — this site
+   only ever renders the summary card, no local article detail page. */
