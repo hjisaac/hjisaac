@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
@@ -7,9 +8,11 @@ import EntryCard from './EntryCard.astro';
 import ProjectCard from './ProjectCard.astro';
 import SkillsGroup from './SkillsGroup.astro';
 import ContactForm from './ContactForm.astro';
+import ArticleCard from './ArticleCard.astro';
 import Footer from './Footer.astro';
 import { loadCv, getSection } from '../lib/cv';
 import { parseMarkdownLink } from '../lib/format';
+import { ARTICLES_ENABLED } from '../lib/features';
 import {
     toExperienceCardProps,
     toEducationCardProps,
@@ -60,6 +63,37 @@ const sameAs = [linkedinContact, githubContact]
     .map((link) => link.url);
 
 const { sections } = t;
+
+// Dummy content (experiments/jobs/) is English-only for now — only show the
+// Articles section on the English page until real, translated articles exist.
+const showArticles = ARTICLES_ENABLED && locale === 'en';
+const articles = showArticles
+    ? (await getCollection('articles')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    : [];
+
+// Every section but Contact is hidden outright when it has no content, so a
+// CV variant/locale missing e.g. papers doesn't show an empty heading.
+const hasExperience = experienceEntries.length > 0;
+const hasEducation = educationCards.length > 0;
+const hasSkills = skillsGroups.length > 0;
+const hasProjects = projectCards.length > 0;
+const hasPapers = paperEntries.length > 0;
+const hasArticles = showArticles && articles.length > 0;
+
+const hiddenSectionIds = new Set(
+    [
+        !hasExperience && sections.experience.id,
+        !hasEducation && sections.education.id,
+        !hasSkills && sections.skills.id,
+        !hasProjects && sections.projects.id,
+        !hasPapers && sections.papers.id,
+    ].filter((id): id is string => Boolean(id)),
+);
+
+const navItems = [
+    ...t.nav.filter((item) => !hiddenSectionIds.has(item.href.slice(1))),
+    ...(hasArticles ? [{ href: `#${sections.articles.id}`, label: sections.articles.title }] : []),
+];
 ---
 
 <Layout
@@ -75,7 +109,7 @@ const { sections } = t;
         sameAs,
     }}
 >
-    <Header logo={t.header.logo} nav={t.nav} menu_open={t.ui.menu_open} menu_close={t.ui.menu_close} />
+    <Header logo={t.header.logo} nav={navItems} menu_open={t.ui.menu_open} menu_close={t.ui.menu_close} />
 
     <main>
         <div class="intro-block">
@@ -89,23 +123,31 @@ const { sections } = t;
         </div>
 
         <div>
-            <Section id={sections.experience.id} title={sections.experience.title} theme={sections.experience.theme}>
-                {experienceEntries.map((entry) => <EntryCard {...entry} />)}
-            </Section>
+            {hasExperience && (
+                <Section id={sections.experience.id} title={sections.experience.title} theme={sections.experience.theme}>
+                    {experienceEntries.map((entry) => <EntryCard {...entry} />)}
+                </Section>
+            )}
 
-            <Section id={sections.education.id} title={sections.education.title} theme={sections.education.theme}>
-                {educationCards.map((entry) => <EntryCard {...entry} />)}
-            </Section>
+            {hasEducation && (
+                <Section id={sections.education.id} title={sections.education.title} theme={sections.education.theme}>
+                    {educationCards.map((entry) => <EntryCard {...entry} />)}
+                </Section>
+            )}
 
-            <Section id={sections.skills.id} title={sections.skills.title} theme={sections.skills.theme}>
-                {skillsGroups.map((group) => <SkillsGroup {...group} />)}
-            </Section>
+            {hasSkills && (
+                <Section id={sections.skills.id} title={sections.skills.title} theme={sections.skills.theme}>
+                    {skillsGroups.map((group) => <SkillsGroup {...group} />)}
+                </Section>
+            )}
 
-            <Section id={sections.projects.id} title={sections.projects.title} theme={sections.projects.theme}>
-                {projectCards.map((entry) => (
-                    <ProjectCard {...entry} viewLiveLabel={t.ui.project_view_label} />
-                ))}
-            </Section>
+            {hasProjects && (
+                <Section id={sections.projects.id} title={sections.projects.title} theme={sections.projects.theme}>
+                    {projectCards.map((entry) => (
+                        <ProjectCard {...entry} viewLiveLabel={t.ui.project_view_label} />
+                    ))}
+                </Section>
+            )}
 
             <Section id={sections.contact.id} title={sections.contact.title} theme={sections.contact.theme}>
                 <ContactForm
@@ -118,9 +160,19 @@ const { sections } = t;
                 />
             </Section>
 
-            <Section id={sections.papers.id} title={sections.papers.title} theme={sections.papers.theme}>
-                {paperEntries.map((entry) => <EntryCard {...entry} />)}
-            </Section>
+            {hasPapers && (
+                <Section id={sections.papers.id} title={sections.papers.title} theme={sections.papers.theme}>
+                    {paperEntries.map((entry) => <EntryCard {...entry} />)}
+                </Section>
+            )}
+
+            {hasArticles && (
+                <Section id={sections.articles.id} title={sections.articles.title} theme={sections.articles.theme}>
+                    {articles.map((article) => (
+                        <ArticleCard slug={article.id} title={article.data.title} date={article.data.date} description={article.data.description} />
+                    ))}
+                </Section>
+            )}
         </div>
 
         <Footer

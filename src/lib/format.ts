@@ -32,7 +32,7 @@ export function mdInlineToHtml(text: string): string {
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     html = html.replace(/\[(.*?)\]\((.*?)\)/g, (_match, label: string, url: string) => {
         if (!isSafeHttpUrl(url)) return label;
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+        return `<a class="entry-inline-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     });
     return html;
 }

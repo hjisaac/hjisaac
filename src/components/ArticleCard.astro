@@ -1,0 +1,32 @@
+---
+import { GITHUB_ICON_PATH } from '../lib/format';
+import { ARTICLES_REPO, ARTICLES_BRANCH, ARTICLES_JOBS_PATH, ARTICLE_FILENAME } from '../lib/features';
+
+interface Props {
+    slug: string;
+    title: string;
+    date: Date;
+    description: string;
+}
+
+const { slug, title, date, description } = Astro.props;
+const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+const jobPath = `${ARTICLES_JOBS_PATH}/${slug}`;
+const folderUrl = `https://github.com/${ARTICLES_REPO}/tree/${ARTICLES_BRANCH}/${jobPath}`;
+const articleUrl = `https://github.com/${ARTICLES_REPO}/blob/${ARTICLES_BRANCH}/${jobPath}/${ARTICLE_FILENAME}`;
+---
+
+<article class="entry">
+    <header class="entry-header">
+        <div class="entry-title-row">
+            <a class="project-github-link" href={folderUrl} target="_blank" rel="noopener noreferrer" aria-label={`${title} on GitHub`}>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d={GITHUB_ICON_PATH} /></svg>
+            </a>
+            <h3 class="entry-title">
+                <a class="entry-inline-link" href={articleUrl} target="_blank" rel="noopener noreferrer">{title}</a>
+            </h3>
+        </div>
+        <p class="entry-meta">{formattedDate}</p>
+    </header>
+    <p class="entry-summary">{description}</p>
+</article>
