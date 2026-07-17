@@ -1,3 +1,6 @@
 [submodule "cvitae"]
 	path = cvitae
 	url = git@hjisaac.github.com:hjisaac/cvitae.git
+[submodule "articling"]
+	path = articling
+	url = git@hjisaac.github.com:hjisaac/run-crucible.git
