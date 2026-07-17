@@ -68,7 +68,7 @@ const { sections } = t;
 // Articles section on the English page until real, translated articles exist.
 const showArticles = ARTICLES_ENABLED && locale === 'en';
 const articles = showArticles
-    ? (await getCollection('articles')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    ? (await getCollection('articles', ({ data }) => data.published)).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
     : [];
 
 // Every section but Contact is hidden outright when it has no content, so a
