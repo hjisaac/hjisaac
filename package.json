@@ -9,13 +9,16 @@
     "preview": "astro preview",
     "astro": "astro",
     "gen:types": "node scripts/generate-types.mjs",
-    "check:translations": "tsx scripts/check-translations.ts"
+    "check:translations": "tsx scripts/check-translations.ts",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
-    "astro": "^5.3.0",
-    "@astrojs/sitemap": "^3.2.1"
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.3.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "json-schema-to-typescript": "^15.0.3",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"

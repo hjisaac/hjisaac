@@ -1,3 +1,5 @@
+import type { CvSkills } from '../../lib/types';
+
 export interface NavItem {
     href: string;
     label: string;
@@ -28,7 +30,7 @@ export interface SiteLocale {
     sections: {
         experience: SectionMeta;
         education: SectionMeta;
-        skills: SectionMeta;
+        skills: SectionMeta & { labels: Record<keyof CvSkills, string> };
         projects: SectionMeta;
         contact: SectionMeta & {
             prompt: string;

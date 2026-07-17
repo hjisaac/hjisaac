@@ -1,5 +1,6 @@
 ---
-import { GITHUB_ICON_PATH, isSafeHttpUrl, mdInlineToHtml } from '../lib/format';
+import { GITHUB_ICON_PATH, EXTERNAL_LINK_ICON_PATH } from '../lib/icons';
+import { isSafeHttpUrl, mdInlineToHtml } from '../lib/format';
 
 interface Props {
     title: string;
@@ -25,11 +26,11 @@ const hasDemoLink = isSafeHttpUrl(demo_url);
         <div class="entry-title-row">
             {code_url && (
                 hasGithubLink ? (
-                    <a class="project-github-link" href={code_url} target="_blank" rel="noopener noreferrer" aria-label={`${title} on GitHub`}>
+                    <a class="project-icon-link" href={code_url} target="_blank" rel="noopener noreferrer" title="GitHub" aria-label={`${title} on GitHub`}>
                         <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d={GITHUB_ICON_PATH} /></svg>
                     </a>
                 ) : (
-                    <span class="project-github-link" aria-disabled="true" aria-label={`${title} on GitHub`}>
+                    <span class="project-icon-link" aria-disabled="true" aria-label={`${title} on GitHub`}>
                         <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d={GITHUB_ICON_PATH} /></svg>
                     </span>
                 )
@@ -38,16 +39,15 @@ const hasDemoLink = isSafeHttpUrl(demo_url);
                 {title}
                 {footnoteMarker != null && <sup class="footnote-ref">{footnoteMarker}</sup>}
             </h3>
-        </div>
-        <p class="entry-meta">
-            {meta}
             {hasDemoLink && (
-                <Fragment>
-                    {' · '}
-                    <a class="entry-inline-link" href={demo_url} target="_blank" rel="noopener noreferrer">{viewLiveLabel}</a>
-                </Fragment>
+                <a class="project-icon-link" href={demo_url} target="_blank" rel="noopener noreferrer" title={viewLiveLabel} aria-label={`${title} — ${viewLiveLabel}`}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d={EXTERNAL_LINK_ICON_PATH} />
+                    </svg>
+                </a>
             )}
-        </p>
+        </div>
+        <p class="entry-meta">{meta}</p>
     </header>
 
     {details && details.length > 0 ? (

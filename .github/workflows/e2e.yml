@@ -1,0 +1,56 @@
+name: e2e
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      # cvitae (private) and articling (public, mirrors run-crucible) are
+      # both configured under a custom SSH host alias that only resolves on
+      # the site owner's machine via their local ~/.ssh/config. Rewrite it
+      # to HTTPS + a read-only, repo-scoped PAT so actions/checkout can pull
+      # both submodules here. See SUBMODULES_READ_TOKEN in repo secrets.
+      - name: Allow submodule checkout over HTTPS
+        run: git config --global url."https://x-access-token:${{ secrets.SUBMODULES_READ_TOKEN }}@github.com/".insteadOf "git@hjisaac.github.com:"
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+
+      # PUBLIC_WEB3FORMS_ACCESS_KEY is intentionally never set here — the
+      # contact form's real submit path stays structurally unreachable in
+      # this build (see e2e/contact-form.spec.ts for why that's the point,
+      # not a gap). PUBLIC_TRACK_VISITS=false is redundant defense-in-depth
+      # for the same reason (the auto visit-tracker already no-ops without
+      # a key) but costs nothing to also set explicitly.
+      - run: npm run build
+        env:
+          PUBLIC_TRACK_VISITS: 'false'
+
+      - run: npm run test:e2e
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
