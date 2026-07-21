@@ -13,14 +13,17 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     steps:
-      # .gitmodules uses plain HTTPS URLs so this works with no rewrite step:
-      # checkout propagates its auth header to submodule fetches, and both
-      # submodules resolve over the same transport as the main repo.
-      #
+      # cvitae is SSH in .gitmodules because Netlify supports private submodules
+      # only via an SSH deploy key. Actions has no such key, so rewrite SSH to
+      # HTTPS here and let the PAT below authenticate it. articling is public
+      # and already HTTPS, so it never depends on this step.
+      - name: Use HTTPS for submodules
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+
       # SUBMODULES_READ_TOKEN is used for this repo as well as the submodules,
       # so it needs Contents:Read on hjisaac/hjisaac and hjisaac/cvitae. (The
       # default GITHUB_TOKEN can't be used: it is scoped to this repo alone and
-      # 404s on the private cvitae.) articling/run-crucible is public.
+      # 404s on the private cvitae.)
       - uses: actions/checkout@v4
         with:
           submodules: recursive
