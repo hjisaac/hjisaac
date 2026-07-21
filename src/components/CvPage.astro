@@ -12,7 +12,7 @@ import ArticleCard from './ArticleCard.astro';
 import Footer from './Footer.astro';
 import { loadCv, getSection } from '../lib/cv';
 import { parseMarkdownLink } from '../lib/format';
-import { ARTICLES_ENABLED } from '../lib/features';
+import { ARTICLES_ENABLED } from '../lib/articles';
 import {
     toExperienceCardProps,
     toEducationCardProps,
@@ -38,7 +38,7 @@ const experienceEntries = getSection<WorkExperienceItem>(cv, 'work_experience').
 const educationEntries = getSection<EducationItem>(cv, 'education').map(toEducationCardProps);
 const projectEntries = getSection<ProjectItem>(cv, 'projects').map(toProjectCardProps);
 const paperEntries = getSection<PaperItem>(cv, 'papers').map(toPaperCardProps);
-const skillsGroups = toSkillsGroups(cv.skills);
+const skillsGroups = toSkillsGroups(cv.skills, t.sections.skills.labels);
 
 // Footnote markers are auto-incremented in page document order (education, then projects) —
 // cvitae no longer carries per-entry marker numbers, see planning decision.

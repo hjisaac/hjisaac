@@ -26,7 +26,16 @@ export const siteLocale: SiteLocale = {
     sections: {
         experience: { id: 'experiences', title: '#expérience', theme: 'light' },
         education: { id: 'education', title: '#éducation', theme: 'dark' },
-        skills: { id: 'skills', title: '#compétences', theme: 'light' },
+        skills: {
+            id: 'skills',
+            title: '#compétences',
+            theme: 'light',
+            labels: {
+                programming_languages: 'Langages de programmation',
+                frameworks_and_libraries: 'Frameworks et bibliothèques',
+                infrastructure_and_tools: 'Infrastructure et outils',
+            },
+        },
         projects: { id: 'projects', title: '#projets', theme: 'dark' },
         contact: {
             id: 'contact',

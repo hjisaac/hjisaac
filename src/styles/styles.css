@@ -322,7 +322,7 @@ section {
     margin: 0;
 }
 
-.project-github-link {
+.project-icon-link {
     display: inline-flex;
     align-items: center;
     color: var(--gray);
@@ -332,12 +332,12 @@ section {
     transition: color var(--transition-nav), opacity var(--transition-nav);
 }
 
-.project-github-link svg {
+.project-icon-link svg {
     width: 0.85em;
     height: 0.85em;
 }
 
-.project-github-link:hover {
+.project-icon-link:hover {
     color: var(--accent-primary);
     opacity: 1;
 }

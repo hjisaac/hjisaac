@@ -1,0 +1,60 @@
+name: e2e
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      # cvitae is SSH in .gitmodules because Netlify supports private submodules
+      # only via an SSH deploy key. Actions has no such key, so rewrite SSH to
+      # HTTPS here and let the PAT below authenticate it. articling is public
+      # and already HTTPS, so it never depends on this step.
+      - name: Use HTTPS for submodules
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+
+      # SUBMODULES_READ_TOKEN is used for this repo as well as the submodules,
+      # so it needs Contents:Read on hjisaac/hjisaac and hjisaac/cvitae. (The
+      # default GITHUB_TOKEN can't be used: it is scoped to this repo alone and
+      # 404s on the private cvitae.)
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.SUBMODULES_READ_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+
+      # PUBLIC_WEB3FORMS_ACCESS_KEY is intentionally never set here — the
+      # contact form's real submit path stays structurally unreachable in
+      # this build (see e2e/contact-form.spec.ts for why that's the point,
+      # not a gap). PUBLIC_TRACK_VISITS=false is redundant defense-in-depth
+      # for the same reason (the auto visit-tracker already no-ops without
+      # a key) but costs nothing to also set explicitly.
+      - run: npm run build
+        env:
+          PUBLIC_TRACK_VISITS: 'false'
+
+      - run: npm run test:e2e
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 30

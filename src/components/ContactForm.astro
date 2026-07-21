@@ -21,6 +21,14 @@ interface Props {
 }
 
 const { prompt, cv_file, download_intro, download_label, form, ui } = Astro.props;
+
+// Resolved here, not inside the script block below — a define:vars script
+// isn't processed as an ES module, so import.meta.env has no meaning
+// there (it ships as a literal, unresolved token and throws a
+// SyntaxError in every browser). Build-time values must be read in
+// frontmatter and passed in via define:vars, same as any other prop.
+const webformsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || '';
+const trackVisits = import.meta.env.PUBLIC_TRACK_VISITS !== 'false';
 ---
 
 <div id="contact-gate" class="section-content">
@@ -51,12 +59,14 @@ const { prompt, cv_file, download_intro, download_label, form, ui } = Astro.prop
         contactSubject: ui.contact_subject,
         visitSubject: ui.visit_subject,
         visitEmail: ui.visit_email,
+        webformsAccessKey,
+        trackVisits,
     }}
 >
     const STORAGE_CV_UNLOCKED = 'cv-unlocked';
     const STORAGE_VISIT_TRACKED = 'visit-tracked';
-    const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || '';
-    const TRACK_VISITS = import.meta.env.PUBLIC_TRACK_VISITS !== 'false';
+    const WEB3FORMS_ACCESS_KEY = webformsAccessKey;
+    const TRACK_VISITS = trackVisits;
 
     async function submitToWeb3Forms(payload) {
         if (!WEB3FORMS_ACCESS_KEY) {

@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { ARTICLES_LOCAL_DIR, ARTICLES_JOBS_PATH, ARTICLE_FILENAME } from './lib/features';
+import { ARTICLES_LOCAL_DIR, ARTICLES_JOBS_PATH, ARTICLE_FILENAME } from './lib/articles';
 
 const articles = defineCollection({
     loader: glob({

@@ -1,6 +1,6 @@
 import type { EducationItem, PaperItem, ProjectItem, WorkExperienceItem } from './types.generated';
 import type { CvSkills } from './types';
-import { normalizeDateRange, SKILL_LABELS } from './format';
+import { normalizeDateRange } from './format';
 
 export interface EntryCardProps {
     kind: 'experience' | 'education' | 'paper';
@@ -87,9 +87,9 @@ export function toPaperCardProps(entry: PaperItem): EntryCardProps {
     };
 }
 
-export function toSkillsGroups(skills: CvSkills): SkillsGroupProps[] {
+export function toSkillsGroups(skills: CvSkills, labels: Record<keyof CvSkills, string>): SkillsGroupProps[] {
     return (Object.entries(skills) as [keyof CvSkills, string[]][]).map(([key, items]) => ({
-        label: SKILL_LABELS[key] ?? key,
+        label: labels[key] ?? key,
         items: items.join(', '),
     }));
 }
