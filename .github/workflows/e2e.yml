@@ -16,14 +16,24 @@ jobs:
       # cvitae (private) and articling (public, mirrors run-crucible) are
       # both configured under a custom SSH host alias that only resolves on
       # the site owner's machine via their local ~/.ssh/config. Rewrite it
-      # to HTTPS + a read-only, repo-scoped PAT so actions/checkout can pull
-      # both submodules here. See SUBMODULES_READ_TOKEN in repo secrets.
+      # to plain HTTPS so actions/checkout can reach them here.
+      #
+      # The credential deliberately does NOT go in this URL: checkout sets
+      # http.https://github.com/.extraheader to an Authorization header and
+      # propagates it to submodule fetches, and that header outranks any
+      # userinfo embedded in the URL. A token spliced in here is silently
+      # ignored, the job falls back to the default GITHUB_TOKEN, and the
+      # private cvitae clone 404s. Passing the PAT as checkout's `token:`
+      # puts it in the header that git actually uses.
       - name: Allow submodule checkout over HTTPS
-        run: git config --global url."https://x-access-token:${{ secrets.SUBMODULES_READ_TOKEN }}@github.com/".insteadOf "git@hjisaac.github.com:"
+        run: git config --global url."https://github.com/".insteadOf "git@hjisaac.github.com:"
 
+      # SUBMODULES_READ_TOKEN clones this repo as well as the submodules, so
+      # it needs read on hjisaac/hjisaac in addition to hjisaac/cvitae.
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+          token: ${{ secrets.SUBMODULES_READ_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
