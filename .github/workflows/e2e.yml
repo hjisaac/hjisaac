@@ -13,23 +13,14 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     steps:
-      # cvitae (private) and articling (public, mirrors run-crucible) are
-      # both configured under a custom SSH host alias that only resolves on
-      # the site owner's machine via their local ~/.ssh/config. Rewrite it
-      # to plain HTTPS so actions/checkout can reach them here.
+      # .gitmodules uses plain HTTPS URLs so this works with no rewrite step:
+      # checkout propagates its auth header to submodule fetches, and both
+      # submodules resolve over the same transport as the main repo.
       #
-      # The credential deliberately does NOT go in this URL: checkout sets
-      # http.https://github.com/.extraheader to an Authorization header and
-      # propagates it to submodule fetches, and that header outranks any
-      # userinfo embedded in the URL. A token spliced in here is silently
-      # ignored, the job falls back to the default GITHUB_TOKEN, and the
-      # private cvitae clone 404s. Passing the PAT as checkout's `token:`
-      # puts it in the header that git actually uses.
-      - name: Allow submodule checkout over HTTPS
-        run: git config --global url."https://github.com/".insteadOf "git@hjisaac.github.com:"
-
-      # SUBMODULES_READ_TOKEN clones this repo as well as the submodules, so
-      # it needs read on hjisaac/hjisaac in addition to hjisaac/cvitae.
+      # SUBMODULES_READ_TOKEN is used for this repo as well as the submodules,
+      # so it needs Contents:Read on hjisaac/hjisaac and hjisaac/cvitae. (The
+      # default GITHUB_TOKEN can't be used: it is scoped to this repo alone and
+      # 404s on the private cvitae.) articling/run-crucible is public.
       - uses: actions/checkout@v4
         with:
           submodules: recursive
