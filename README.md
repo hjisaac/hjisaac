@@ -10,6 +10,8 @@ I bring a strong software engineering background, with a focus on **turning comp
 
 ### 📚 Research
 
-Interested in **deep-tech, applied AI, AI research, and building useful technologies backed by research**.
+My experience includes **applied AI research**, with an interest in **deep-tech and building useful technologies backed by research**.
+
+Currently exploring **agentic AI and context engineering**.
 
 [Website (WIP)](https://unique-cocada-fd4e1e.netlify.app) · [LinkedIn](https://www.linkedin.com/in/hjisaac/)
