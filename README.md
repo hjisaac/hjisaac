@@ -10,6 +10,6 @@ I bring a strong software engineering background, with a focus on **turning comp
 
 ### 📚 Research
 
-Interested in **deep-tech, Applied AI, AI research, and building useful technologies backed by research**.
+Interested in **deep-tech, applied AI, AI research, and building useful technologies backed by research**.
 
 [Website (WIP)](https://unique-cocada-fd4e1e.netlify.app) · [LinkedIn](https://www.linkedin.com/in/hjisaac/)
