@@ -12,4 +12,4 @@ I bring a strong software engineering foundation, with a focus on **turning comp
 
 Interested in **deep-tech, AI research, and building high standard technologies**.
 
-[Website](https://unique-cocada-fd4e1e.netlify.app) · [LinkedIn](https://www.linkedin.com/in/hjisaac/)
+[Website (WIP)](https://unique-cocada-fd4e1e.netlify.app) · [LinkedIn](https://www.linkedin.com/in/hjisaac/)
