@@ -6,7 +6,7 @@ I work at the intersection of **AI research, software engineering, and applied M
 
 ### 💻 Engineering
 
-I bring a strong software engineering foundation, with a focus on **turning complex ideas into robust, usable systems**.
+I bring a strong software engineering foundation, with a focus on **turning complex ideas into effective, usable systems**.
 
 ### 📚 Research
 
