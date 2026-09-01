@@ -6,10 +6,10 @@ I work at the intersection of **AI research, software engineering, and applied M
 
 ### 💻 Engineering
 
-I bring a strong software engineering foundation, with a focus on **turning complex ideas into effective, usable systems**.
+I bring a strong software engineering background, with a focus on **turning complex ideas into effective, usable systems**.
 
 ### 📚 Research
 
-Interested in **deep-tech, AI research, and building high standard technologies**.
+Interested in **deep-tech, Applied AI, AI research, and building useful technologies backed by research**.
 
 [Website (WIP)](https://unique-cocada-fd4e1e.netlify.app) · [LinkedIn](https://www.linkedin.com/in/hjisaac/)
