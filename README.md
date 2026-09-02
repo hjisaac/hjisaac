@@ -2,7 +2,7 @@
 
 AI Research Engineer with a background in Software Engineering.
 
-I work at the intersection of **AI research, software engineering, and applied ML**, with a particular interest in building intelligent systems that can move from research ideas to useful and amazing products.
+I work at the intersection of **AI research, software engineering, and applied ML**.
 
 ### 💻 Engineering
 
