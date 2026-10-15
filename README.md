@@ -12,6 +12,5 @@ I bring a strong software engineering background, with a focus on **turning comp
 
 My experience includes **applied AI research**, with an interest in **deep-tech and building useful technologies backed by research**.
 
-Currently exploring **agentic AI and context engineering**.
+Currently exploring **Harness engineering**.
 
-[Website (WIP)](https://unique-cocada-fd4e1e.netlify.app) · [LinkedIn](https://www.linkedin.com/in/hjisaac/)
