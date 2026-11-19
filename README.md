@@ -1,8 +1,6 @@
 # Hi, I'm Isaac 👋
 
-AI Research Engineer & Computer Scientist bringing a strong software engineering background to AI research.
-
-I was recently at [InstaDeep](https://instadeep.com/) working on foundation models and representation learning after completing my Master in AI for Science at [AIMS South Africa](https://aims.ac.za/) / University of Cape Town as a Google DeepMind Scholar. Here is my quick online CV 🤗
+AI Research Engineer & Computer Scientist bringing a strong software engineering background to AI research. I was recently at [InstaDeep](https://instadeep.com/) working on foundation models and representation learning. Here is my quick online CV 🤗
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230A66C2.svg?style=flat&logo=LinkedIn&logoColor=white)](https://linkedin.com/in/hjisaac)
 
