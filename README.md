@@ -2,18 +2,13 @@
 
 **AI Research Engineer & Computer Scientist** working at the intersection of **Intelligent Systems Design, Multi-Agent Architectures, Evaluation at Scale, and Verifiable AI**.
 
-- 🔬 **Research:** Ex-Research Engineer Intern at **[InstaDeep](https://instadeep.com/)** (BioAI & Foundation Models).
-- 🎓 **Education:** Master in AI for Science from **[AIMS South Africa](https://aims.ac.za/) / University of Cape Town** (Google DeepMind Scholar).
-- 💻 **Engineering:** 4+ years architecting distributed backend services, asynchronous daemons, and offline-first client systems.
-- 🎯 **Current Focus:** Intelligent systems design, multi-agent coordination & tool orchestration, empirical evaluation suites, and verifiable decision provenance.
-
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230A66C2.svg?style=flat&logo=LinkedIn&logoColor=white)](https://linkedin.com/in/hjisaac)
 [![Email](https://img.shields.io/badge/Email-hjisaac.h%40gmail.com-blue?style=flat&logo=gmail&logoColor=white)](mailto:hjisaac.h@gmail.com)
 [![CV](https://img.shields.io/badge/Curriculum%20Vitae-PDF-black?style=flat&logo=adobeacrobatreader&logoColor=white)](https://github.com/hjisaac/hjisaac/raw/main/public/assets/cv/isaac_houngue_cv.pdf)
 
 ---
 
-<details open>
+<details>
 <summary><h2>🧑‍🔬 Research & 📚 Publications</h2></summary>
 
 ### 📄 Preprints & Submissions
@@ -35,7 +30,7 @@
 ---
 
 <details>
-<summary><h2>💼 Industry & Research Experience</h2></summary>
+<summary><h2>💼 Work Experience</h2></summary>
 
 1. ### Research Engineer Intern — [InstaDeep](https://instadeep.com/)
    *South Africa (Hybrid) | Jul 2025 – Aug 2026*
@@ -72,11 +67,3 @@
    - **Thesis:** *A Smart Contract-based Remote Voting Platform using Blind Signature*.
 
 </details>
-
----
-
-## 🎯 Technical & Scientific Skills
-
-- **AI & Multi-Agent Systems:** Multi-Agent Architectures, Generative Models Evaluation at Scale, Representation Interpretability, Edge AI, Retrieval-Augmented Generation (RAG), Transformers, Self-Supervised Learning, Fine-Tuning, System Design at Scale.
-- **Languages & Frameworks:** Python, TypeScript/JavaScript, PyTorch, LangChain, FastAPI, Django, DRF, React, Next.js.
-- **Data, Systems & Tooling:** Model Context Protocol (MCP), Docker, Linux, Git, Hydra, PostgreSQL, SQLite, Neo4j.
