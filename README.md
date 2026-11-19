@@ -62,4 +62,4 @@ AI Research Engineer & Computer Scientist bringing a strong software engineering
 
 ## 🎯 Interests & Skills
 
-Intelligent Systems Design, Multi-Agent Architectures, Evaluation at Scale, Verifiable AI, Python, PyTorch, TypeScript, Docker.
+Intelligent Systems Design, Multi-Agent Architectures, Evaluation at Scale, Verifiable AI.
