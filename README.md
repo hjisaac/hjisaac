@@ -1,6 +1,6 @@
 # Hi, I'm Isaac 👋
 
-AI Research Engineer & Computer Scientist working at the intersection of Intelligent Systems Design, Multi-Agent Architectures, Evaluation at Scale, and Verifiable AI.
+AI Research Engineer & Computer Scientist bringing a strong software engineering background to AI research.
 
 I was recently at [InstaDeep](https://instadeep.com/) working on foundation models and representation learning after completing my Master in AI for Science at [AIMS South Africa](https://aims.ac.za/) / University of Cape Town as a Google DeepMind Scholar. Here is my quick online CV 🤗
 
@@ -62,6 +62,6 @@ I was recently at [InstaDeep](https://instadeep.com/) working on foundation mode
 
 </details>
 
-## 🎯 Interests
+## 🎯 Interests & Skills
 
-Intelligent Systems Design, Multi-Agent Architectures, Evaluation at Scale, Verifiable AI.
+Intelligent Systems Design, Multi-Agent Architectures, Evaluation at Scale, Verifiable AI, Python, PyTorch, TypeScript, Docker.
