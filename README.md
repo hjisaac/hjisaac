@@ -50,12 +50,12 @@ AI Research Engineer & Computer Scientist bringing a strong software engineering
 1. ### Master in AI for Science
    **[African Institute for Mathematical Sciences (AIMS, South Africa)](https://aims.ac.za/)** *(Conferred by University of Cape Town)* | *2024 – 2025*
    - **Honors:** Google DeepMind Scholarship.
-   - **Coursework:** Mathematical Foundations of AI, Bayesian Inference, Machine Learning at Scale, Information Theory, Reinforcement Learning, Deep Generative Models, LLM Engineering.
+   - **Coursework:** Mathematical Foundations of AI, Bayesian Inference, Machine Learning at Scale, Information Theory, Reinforcement Learning, Deep Generative Models, LLM Engineering, and more.
    - **Thesis:** *Advancing De Novo Glycopeptide Sequencing with InstaNovo in Glycoproteomics*.
 
 2. ### Master in Computer Science
    **[Institut de Mathématiques et de Sciences Physiques (IMSP, Benin)](https://www.imsp-benin.com/home/)** | *2018 – 2020*
-   - **Coursework:** Advanced Algorithms & Data Structures, Software Architecture, Distributed Databases, Information Theory, Artificial Intelligence.
+   - **Coursework:** Advanced Algorithms & Data Structures, Software Architecture, Distributed Databases, Information Theory, Artificial Intelligence, and more.
    - **Thesis:** *A Smart Contract-based Remote Voting Platform using Blind Signature*.
 
 </details>
