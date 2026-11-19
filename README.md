@@ -9,7 +9,7 @@ I was recently at [InstaDeep](https://instadeep.com/) working on foundation mode
 [![CV](https://img.shields.io/badge/Curriculum%20Vitae-PDF-black?style=flat&logo=adobeacrobatreader&logoColor=white)](https://github.com/hjisaac/hjisaac/raw/main/public/assets/cv/isaac_houngue_cv.pdf)
 
 <details>
-<summary><h2>Work Experience</h2></summary>
+<summary><h2>💼 Work Experience</h2></summary>
 
 1. ### Research Engineer Intern — [InstaDeep](https://instadeep.com/)
    *South Africa (Hybrid) | Jul 2025 – Aug 2026*
@@ -24,13 +24,13 @@ I was recently at [InstaDeep](https://instadeep.com/) working on foundation mode
 
 3. ### Frontend & QA Software Engineer — [Fasfox](https://fasfox.com/)
    *France (Remote) | Oct 2021 – Feb 2023*
-   - Developed offline-first PWAs and desktop telemetry interfaces (digital signatures, QR scanning, volume tracking).
+   - Developed PWAs and web applications for [Concrete Dispatch](https://www.concretedispatch.eu/) (digital signatures, QR scanning, volume tracking).
    - Designed comprehensive test plans, end-to-end regression suites, and coordinated functional user acceptance testing (UAT).
 
 </details>
 
 <details>
-<summary><h2>Research</h2></summary>
+<summary><h2>🧑‍🔬 Research</h2></summary>
 
 ### 📄 Preprints & Submissions
 
@@ -49,7 +49,7 @@ I was recently at [InstaDeep](https://instadeep.com/) working on foundation mode
 </details>
 
 <details>
-<summary><h2>Education</h2></summary>
+<summary><h2>🎓 Education</h2></summary>
 
 1. ### Master in AI for Science
    **[African Institute for Mathematical Sciences (AIMS, South Africa)](https://aims.ac.za/)** *(Conferred by University of Cape Town)* | *2024 – 2025*
@@ -64,6 +64,6 @@ I was recently at [InstaDeep](https://instadeep.com/) working on foundation mode
 
 </details>
 
-## Interests
+## 🎯 Interests
 
 Intelligent Systems Design, Multi-Agent Architectures, Evaluation at Scale, Verifiable AI.
